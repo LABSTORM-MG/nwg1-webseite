@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Elektronen im Ladekabel – von der Wallbox zur Autobatterie **</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+:root {
+  --bg: #f4f6f9; --bg-grad-1: #eef2f8; --bg-grad-2: #e7ecf5;
+  --card: #ffffff; --border: #d8dee8; --text: #1c2128; --muted: #59636e;
+  --link: #0550ae; --link-hover: #0a3d7a;
+  --accent-1: #6366f1; --accent-2: #0ea5e9;
+  --shadow: 0 1px 2px rgba(20,30,50,.04), 0 8px 24px rgba(20,30,50,.05);
+  --hint-bg: #fff8c5; --hint-border: #9a6700; --hint-text: #7a5200;
+  --sol-bg: #ddf4ff; --sol-border: #0550ae; --sol-text: #063d82;
+  --pill-bg: #eef1ff; --pill-text: #4338ca;
+  --diff-1: #1a7f37; --diff-1-bg: #dafbe1;
+  --diff-2: #9a6700; --diff-2-bg: #fff8c5;
+  --diff-3: #cf222e; --diff-3-bg: #ffebe9;
+}
+:root[data-theme="dark"] {
+  --bg: #0d1117; --bg-grad-1: #0d1117; --bg-grad-2: #131a24;
+  --card: #161b22; --border: #30363d; --text: #e6edf3; --muted: #9198a1;
+  --link: #6cb6ff; --link-hover: #a5d1ff;
+  --accent-1: #818cf8; --accent-2: #38bdf8;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+  --hint-bg: #2b2111; --hint-border: #d29922; --hint-text: #e3b341;
+  --sol-bg: #10243d; --sol-border: #388bfd; --sol-text: #8ec8ff;
+  --pill-bg: #1c2333; --pill-text: #b3c2ff;
+  --diff-1: #3fb950; --diff-1-bg: #12261b;
+  --diff-2: #d29922; --diff-2-bg: #2b2111;
+  --diff-3: #f85149; --diff-3-bg: #2b1618;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1117; --bg-grad-1: #0d1117; --bg-grad-2: #131a24;
+    --card: #161b22; --border: #30363d; --text: #e6edf3; --muted: #9198a1;
+    --link: #6cb6ff; --link-hover: #a5d1ff;
+    --accent-1: #818cf8; --accent-2: #38bdf8;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+    --hint-bg: #2b2111; --hint-border: #d29922; --hint-text: #e3b341;
+    --sol-bg: #10243d; --sol-border: #388bfd; --sol-text: #8ec8ff;
+    --pill-bg: #1c2333; --pill-text: #b3c2ff;
+    --diff-1: #3fb950; --diff-1-bg: #12261b;
+    --diff-2: #d29922; --diff-2-bg: #2b2111;
+    --diff-3: #f85149; --diff-3-bg: #2b1618;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(1000px 420px at 15% -10%, color-mix(in srgb, var(--accent-1) 9%, transparent), transparent),
+    radial-gradient(900px 420px at 100% 0%, color-mix(in srgb, var(--accent-2) 9%, transparent), transparent),
+    linear-gradient(180deg, var(--bg-grad-1), var(--bg-grad-2) 220px, var(--bg) 420px);
+  min-height: 100vh;
+}
+.wrap { max-width: 760px; margin: 0 auto; padding: 28px 20px 70px; }
+.back { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); text-decoration: none; font-size: 13.5px; margin-bottom: 16px; }
+.back:hover { color: var(--link); }
+.head {
+  background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+  padding: 22px 26px; box-shadow: var(--shadow); margin-bottom: 18px;
+}
+.eyebrow {
+  display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--pill-text); background: var(--pill-bg); padding: 3px 10px; border-radius: 999px; margin-bottom: 12px;
+}
+.head h1 { margin: 0 0 8px; font-size: 24px; font-weight: 800; letter-spacing: -0.01em; line-height: 1.25; }
+.diffpill { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px; margin-left: 10px; vertical-align: middle; }
+.diffpill.diff-1 { color: var(--diff-1); background: var(--diff-1-bg); }
+.diffpill.diff-2 { color: var(--diff-2); background: var(--diff-2-bg); }
+.diffpill.diff-3 { color: var(--diff-3); background: var(--diff-3-bg); }
+.intro { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.55; }
+.media { margin-bottom: 18px; }
+.media img { max-width: 100%; border-radius: 12px; border: 1px solid var(--border); display: block; }
+.media-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
+.media-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+.media-card iframe { display: block; width: 100%; height: 180px; border: 0; }
+.media-card .cap { padding: 10px 12px; }
+.media-card .cap .t { font-weight: 700; font-size: 14px; }
+.media-card .cap .s { font-size: 12.5px; color: var(--muted); }
+.media-note {
+  background: var(--hint-bg); border: 1px solid var(--hint-border); color: var(--hint-text);
+  border-radius: 10px; padding: 10px 14px; font-size: 13.5px; margin-bottom: 16px;
+}
+.given {
+  background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+  padding: 16px 20px; box-shadow: var(--shadow); margin-bottom: 18px;
+}
+.given .label { font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.given-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px 20px; }
+.given-row { display: flex; justify-content: space-between; gap: 12px; font-size: 14.5px; padding: 4px 0; border-bottom: 1px dashed var(--border); }
+.given-row:last-child { border-bottom: none; }
+.given-row .k { color: var(--muted); }
+.aufgabe {
+  background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+  padding: 18px 22px 20px; box-shadow: var(--shadow); margin-bottom: 14px;
+}
+.aufgabe-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.aufgabe-num {
+  flex: 0 0 auto; width: 26px; height: 26px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  color: white; font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center;
+}
+.aufgabe-head h2 { margin: 0; font-size: 15.5px; font-weight: 700; color: var(--muted); }
+.aufgabe p.q { margin: 0 0 14px; font-size: 15.5px; line-height: 1.6; }
+details { margin-bottom: 8px; }
+details:last-child { margin-bottom: 0; }
+summary {
+  cursor: pointer; font-size: 13px; font-weight: 700; list-style: none;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 12px; border-radius: 7px; border: 1px solid var(--border);
+  color: var(--muted); background: color-mix(in srgb, var(--border) 25%, transparent);
+  transition: background .12s ease;
+}
+summary::-webkit-details-marker { display: none; }
+summary:hover { background: color-mix(in srgb, var(--accent-1) 12%, transparent); }
+details[open] summary { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+.box {
+  margin-top: 0; padding: 12px 16px; border-radius: 0 8px 8px 8px;
+  font-size: 14.5px; line-height: 1.65; border: 1px solid; border-top: none;
+}
+.hint-box { background: var(--hint-bg); border-color: var(--hint-border); color: var(--hint-text); }
+.sol-box { background: var(--sol-bg); border-color: var(--sol-border); color: var(--sol-text); }
+.sol-box strong { color: var(--text); }
+footer { text-align: center; color: var(--muted); font-size: 12.5px; margin-top: 28px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../../index.html">← Zur Übersicht</a>
+<div class="head">
+<div class="eyebrow">Übungsaufgabe · Ein Atom</div>
+<h1>Elektronen im Ladekabel – von der Wallbox zur Autobatterie<span class="diffpill diff-2">●●○ mittel</span></h1>
+<p class="intro">Wie viele Elektronen fließen eigentlich durchs Ladekabel, wenn ein Elektroauto lädt? Teil A betrachtet das Kabel selbst, Teil B die ganze Batterieladung.</p>
+</div>
+
+<div class="given">
+<div class="label">Gegeben</div>
+<div class="given-grid"><div class="given-row"><span class="k">Ladeleistung</span><span class="v">$P = 11$ kW $= 11\,000$ W</span></div><div class="given-row"><span class="k">Batteriespannung</span><span class="v">$U = 400$ V</span></div><div class="given-row"><span class="k">Batteriekapazität</span><span class="v">$W = 77$ kWh</span></div><div class="given-row"><span class="k">Elementarladung</span><span class="v">$e = 1{,}602 \times 10^{-19}$ C</span></div><div class="given-row"><span class="k">Avogadro-Konstante</span><span class="v">$N_A = 6{,}022 \times 10^{23}$ mol$^{-1}$</span></div></div>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-head"><div class="aufgabe-num">1</div><h2>Aufgabe 1 – Teil A – Das Ladekabel</h2></div>
+<p class="q">Berechne den Ladestrom I aus Leistung und Spannung.</p>
+<details><summary>💡 Hinweis</summary><div class="box hint-box">I = P / U</div></details>
+<details><summary>✅ Lösungsweg</summary><div class="box sol-box">I = 11.000/400 = <strong>27,5 A</strong>.</div></details>
+</div><div class="aufgabe">
+<div class="aufgabe-head"><div class="aufgabe-num">2</div><h2>Aufgabe 2 – Teil A – Das Ladekabel</h2></div>
+<p class="q">Wie viele Elektronen fließen pro Sekunde durch das Kabel?</p>
+<details><summary>💡 Hinweis</summary><div class="box hint-box">Elektronen/s = I / e</div></details>
+<details><summary>✅ Lösungsweg</summary><div class="box sol-box">27,5 / 1,602×10⁻¹⁹ ≈ <strong>1,72 × 10²⁰ Elektronen/s</strong>.</div></details>
+</div><div class="aufgabe">
+<div class="aufgabe-head"><div class="aufgabe-num">3</div><h2>Aufgabe 3 – Teil A – Das Ladekabel</h2></div>
+<p class="q">Nach wie vielen Sekunden ist genau 1 Mol Elektronen geflossen? Rechne das Ergebnis in Minuten um.</p>
+<details><summary>💡 Hinweis</summary><div class="box hint-box">t = $N_{A}$ / (Elektronen pro Sekunde)</div></details>
+<details><summary>✅ Lösungsweg</summary><div class="box sol-box">t = 6,022×10²³ / 1,72×10²⁰ ≈ 3508 s ≈ <strong>58,5 min</strong>.</div></details>
+</div><div class="aufgabe">
+<div class="aufgabe-head"><div class="aufgabe-num">4</div><h2>Aufgabe 4 – Teil A – Das Ladekabel</h2></div>
+<p class="q">Welche elektrische Ladung trägt 1 Mol Elektronen? Das Ergebnis hat einen berühmten Namen in der Elektrochemie.</p>
+<details><summary>💡 Hinweis</summary><div class="box hint-box">$Q = N_{A} \cdot e$</div></details>
+<details><summary>✅ Lösungsweg</summary><div class="box sol-box">Q = 6,022×10²³ × 1,602×10⁻¹⁹ ≈ <strong>96.472 C/mol</strong> — das ist die <strong>Faraday-Konstante</strong> (Literaturwert 96.485 C/mol).</div></details>
+</div><div class="aufgabe">
+<div class="aufgabe-head"><div class="aufgabe-num">5</div><h2>Aufgabe 5 – Teil B – Die Autobatterie</h2></div>
+<p class="q">Wie lange dauert es, die 77-kWh-Batterie vollzuladen (in Stunden)?</p>
+<details><summary>💡 Hinweis</summary><div class="box hint-box">t = W / P</div></details>
+<details><summary>✅ Lösungsweg</summary><div class="box sol-box">t = 77.000/11.000 = <strong>7,0 h</strong>.</div></details>
+</div><div class="aufgabe">
+<div class="aufgabe-head"><div class="aufgabe-num">6</div><h2>Aufgabe 6 – Teil B – Die Autobatterie</h2></div>
+<p class="q">Welche Gesamtladung Q fließt beim Ladevorgang?</p>
+<details><summary>💡 Hinweis</summary><div class="box hint-box">W = Q · U, also Q = W / U. Achte auf die Einheiten (W muss in Joule stehen!).</div></details>
+<details><summary>✅ Lösungsweg</summary><div class="box sol-box">W = 77 kWh = 77×3,6×10⁶ J = 2,772×10⁸ J. Q = 2,772×10⁸/400 = <strong>693.000 C</strong>.</div></details>
+</div><div class="aufgabe">
+<div class="aufgabe-head"><div class="aufgabe-num">7</div><h2>Aufgabe 7 – Teil B – Die Autobatterie</h2></div>
+<p class="q">Wie viele Elektronen fließen insgesamt?</p>
+<details><summary>💡 Hinweis</summary><div class="box hint-box">N = Q / e</div></details>
+<details><summary>✅ Lösungsweg</summary><div class="box sol-box">N = 693.000 / 1,602×10⁻¹⁹ ≈ <strong>4,33 × 10²⁴ Elektronen</strong>.</div></details>
+</div><div class="aufgabe">
+<div class="aufgabe-head"><div class="aufgabe-num">8</div><h2>Aufgabe 8 – Teil B – Die Autobatterie</h2></div>
+<p class="q">Wie viele Mol Elektronen ist das? Überrascht dich das Ergebnis?</p>
+<details><summary>💡 Hinweis</summary><div class="box hint-box">$n = N / N_{A}$</div></details>
+<details><summary>✅ Lösungsweg</summary><div class="box sol-box">n = 4,33×10²⁴ / 6,022×10²³ ≈ <strong>7,18 mol</strong> — nur gut 7 Mol Elektronen für eine ganze Autoladung, trotz der gigantischen absoluten Elektronenzahl. Das zeigt, wie unvorstellbar groß die Avogadro-Konstante ist.</div></details>
+</div>
+<footer>Naturwissenschaftliche Grundlagen I · Übungsaufgaben</footer>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (window.renderMathInElement) {
+    renderMathInElement(document.body, {delimiters: [{left: "$", right: "$", display: false}]});
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>NWG1 – Übersicht</title>
+<style>
+:root {
+  --bg: #f4f6f9; --bg-grad-1: #eef2f8; --bg-grad-2: #e7ecf5;
+  --card: #ffffff; --border: #d8dee8; --text: #1c2128; --muted: #59636e;
+  --link: #0550ae; --link-hover: #0a3d7a;
+  --accent-1: #6366f1; --accent-2: #0ea5e9;
+  --shadow: 0 1px 2px rgba(20,30,50,.04), 0 8px 24px rgba(20,30,50,.05);
+  --shadow-hover: 0 4px 10px rgba(20,30,50,.07), 0 16px 36px rgba(20,30,50,.11);
+  --pill-bg: #eef1ff; --pill-text: #4338ca;
+  --diff-1: #1a7f37; --diff-2: #9a6700; --diff-3: #cf222e;
+  --done-bg: #dafbe1; --done-text: #1a7f37;
+}
+:root[data-theme="dark"] {
+  --bg: #0d1117; --bg-grad-1: #0d1117; --bg-grad-2: #131a24;
+  --card: #161b22; --border: #30363d; --text: #e6edf3; --muted: #9198a1;
+  --link: #6cb6ff; --link-hover: #a5d1ff;
+  --accent-1: #818cf8; --accent-2: #38bdf8;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+  --shadow-hover: 0 4px 10px rgba(0,0,0,.4), 0 16px 36px rgba(0,0,0,.5);
+  --pill-bg: #1c2333; --pill-text: #b3c2ff;
+  --diff-1: #3fb950; --diff-2: #d29922; --diff-3: #f85149;
+  --done-bg: #12261b; --done-text: #3fb950;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1117; --bg-grad-1: #0d1117; --bg-grad-2: #131a24;
+    --card: #161b22; --border: #30363d; --text: #e6edf3; --muted: #9198a1;
+    --link: #6cb6ff; --link-hover: #a5d1ff;
+    --accent-1: #818cf8; --accent-2: #38bdf8;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+    --shadow-hover: 0 4px 10px rgba(0,0,0,.4), 0 16px 36px rgba(0,0,0,.5);
+    --pill-bg: #1c2333; --pill-text: #b3c2ff;
+    --diff-1: #3fb950; --diff-2: #d29922; --diff-3: #f85149;
+    --done-bg: #12261b; --done-text: #3fb950;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(1200px 480px at 12% -10%, color-mix(in srgb, var(--accent-1) 9%, transparent), transparent),
+    radial-gradient(1000px 480px at 100% 0%, color-mix(in srgb, var(--accent-2) 9%, transparent), transparent),
+    linear-gradient(180deg, var(--bg-grad-1), var(--bg-grad-2) 280px, var(--bg) 560px);
+  min-height: 100vh;
+}
+.wrap { max-width: 940px; margin: 0 auto; padding: 40px 22px 70px; }
+header.hero { margin-bottom: 30px; }
+header.hero h1 {
+  margin: 0 0 10px; font-size: clamp(28px, 4vw, 38px); font-weight: 800; letter-spacing: -0.02em;
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+header.hero p.sub { margin: 0 0 20px; color: var(--muted); font-size: 15.5px; max-width: 680px; line-height: 1.6; }
+.stats { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.stat { background: var(--pill-bg); color: var(--pill-text); border-radius: 999px; padding: 7px 16px; font-size: 13px; font-weight: 600; }
+#progress-stat { transition: background .2s ease, color .2s ease; }
+.progress-bar { flex: 1 1 160px; max-width: 220px; height: 8px; border-radius: 999px; background: var(--pill-bg); overflow: hidden; }
+.progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); transition: width .25s ease; border-radius: 999px; }
+.reset-btn {
+  border: 1px solid var(--border); background: var(--card); color: var(--muted);
+  border-radius: 999px; padding: 6px 14px; font-size: 12.5px; font-weight: 600; cursor: pointer;
+}
+.reset-btn:hover { color: var(--link); border-color: var(--link); }
+.row {
+  background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+  padding: 22px 26px 24px; box-shadow: var(--shadow); margin-bottom: 16px;
+  transition: box-shadow .15s ease, border-color .15s ease;
+}
+.row:hover { box-shadow: var(--shadow-hover); border-color: color-mix(in srgb, var(--accent-1) 30%, var(--border)); }
+.row-head { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+.badge {
+  flex: 0 0 auto; width: 36px; height: 36px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  color: white; font-weight: 700; font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+}
+.row-head h2 { margin: 0; font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
+.row-body { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 32px; }
+.col-label { font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.col ul { list-style: none; margin: 0; padding: 0; }
+.col li { font-size: 14.5px; line-height: 1.5; display: flex; align-items: baseline; gap: 6px; padding: 3px 0; }
+.col li.empty { color: var(--muted); font-style: italic; }
+.col a {
+  color: var(--link); text-decoration: none; display: inline-flex; align-items: baseline; gap: 7px;
+  padding: 3px 8px; margin: 0 -8px; border-radius: 6px; min-width: 0;
+  transition: background .12s ease, color .12s ease;
+}
+.col a:hover { background: color-mix(in srgb, var(--accent-1) 10%, transparent); color: var(--link-hover); }
+.col a .ic { flex: 0 0 auto; }
+.col a .lbl { overflow-wrap: break-word; word-break: normal; }
+.diff { font-size: 10px; letter-spacing: 1px; flex: 0 0 auto; }
+.diff-1 { color: var(--diff-1); } .diff-2 { color: var(--diff-2); } .diff-3 { color: var(--diff-3); }
+
+/* --- custom checkbox --- */
+.tasklist li { align-items: center; gap: 0; }
+.chkwrap { position: relative; flex: 0 0 auto; width: 19px; height: 19px; margin-right: 9px; }
+.tasklist .chk {
+  position: absolute; inset: 0; margin: 0; opacity: 0; cursor: pointer; z-index: 1;
+}
+.chkbox {
+  position: absolute; inset: 0; border-radius: 6px; border: 2px solid var(--border);
+  background: var(--card); cursor: pointer;
+  transition: background .15s ease, border-color .15s ease, transform .08s ease;
+}
+.chkwrap:hover .chkbox { border-color: var(--accent-1); }
+.tasklist .chk:checked ~ .chkbox {
+  background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  border-color: transparent;
+}
+.chkbox::after {
+  content: ""; position: absolute; left: 5px; top: 1px; width: 5px; height: 10px;
+  border: solid white; border-width: 0 2px 2px 0; transform: rotate(45deg) scale(0);
+  transition: transform .12s ease;
+}
+.tasklist .chk:checked ~ .chkbox::after { transform: rotate(45deg) scale(1); }
+.tasklist .chk:active ~ .chkbox { transform: scale(0.9); }
+.tasklist .chk:focus-visible ~ .chkbox { outline: 2px solid var(--accent-1); outline-offset: 2px; }
+
+.exlabel { display: inline-flex; align-items: baseline; gap: 6px; flex: 1; min-width: 0; cursor: default; }
+.tasklist li.done .lbl { text-decoration: line-through; opacity: .6; }
+.tasklist li.done a { color: var(--done-text); }
+.tasklist li.done { background: color-mix(in srgb, var(--done-bg) 60%, transparent); border-radius: 6px; }
+.kv { margin-top: 26px; background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 22px 26px; box-shadow: var(--shadow); }
+.kv h2 { margin: 0 0 14px; font-size: 18px; }
+.kv ul { list-style: none; margin: 0; padding: 0; columns: 2; column-gap: 32px; }
+.kv li { font-size: 14.5px; margin-bottom: 4px; break-inside: avoid; }
+.kv a { color: var(--link); text-decoration: none; display: inline-flex; gap: 7px; }
+.kv a:hover { color: var(--link-hover); text-decoration: underline; }
+footer { text-align: center; color: var(--muted); font-size: 12.5px; margin-top: 30px; }
+@media (max-width: 640px) {
+  .row-body { grid-template-columns: 1fr; }
+  .kv ul { columns: 1; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+  <h1>Naturwissenschaftliche Grundlagen I</h1>
+  <p class="sub">Alle Vorlesungen und Übungsaufgaben auf einen Blick. Hake erledigte Übungsaufgaben ab — der Fortschritt wird in einem Cookie in deinem Browser gespeichert. Schwierigkeit: ●○○ (leicht) bis ●●● (schwer).</p>
+  <div class="stats">
+    <span class="stat">📚 12 Themen</span>
+    <span class="stat">📄 21 Vorlesungsdateien</span>
+    <span class="stat" id="progress-stat">✅ 0/71 erledigt</span>
+    <span class="progress-bar"><span class="progress-bar-fill" id="progress-fill"></span></span>
+    <button class="reset-btn" id="reset-progress" type="button">Fortschritt zurücksetzen</button>
+  </div>
+</header>
+
+<article class="row">
+  <div class="row-head">
+    <div class="badge">01</div>
+    <h2>Einheiten</h2>
+  </div>
+  <div class="row-body">
+    <div class="col">
+      <div class="col-label">📘 Vorlesung</div>
+      <ul>
+<li><a href="Vorlesungen/01%20-%20Einheiten/NWG1%2001%20-%20Einf%C3%BChrung.pdf"><span class="ic">📄</span><span class="lbl">NWG1 01 - Einführung</span></a></li>
+<li><a href="Vorlesungen/01%20-%20Einheiten/NWG1%2001%20-%20Einheiten.pdf"><span class="ic">📄</span><span class="lbl">NWG1 01 - Einheiten</span></a></li>
+      </ul>
+    </div>
+    <div class="col">
+      <div class="col-label">✏️ Übungsaufgaben</div>
+      <ul class="tasklist">
+<li data-exid="ex0"><span class="chkwrap"><input type="checkbox" class="chk" id="ex0"><label for="ex0" class="chkbox"></label></span><label for="ex0" class="exlabel"><a href="%C3%9Cbungsaufgaben/01%20-%20Einheiten/%C3%9Cbung%20Einheiten.html"><span class="ic">✏️</span><span class="lbl">Übung Einheiten</span></a></label></li>
+<li data-exid="ex1"><span class="chkwrap"><input type="checkbox" class="chk" id="ex1"><label for="ex1" class="chkbox"></label></span><label for="ex1" class="exlabel"><a href="%C3%9Cbungsaufgaben/01%20-%20Einheiten/Auto%20oder%20Schnecke%20%2A.html"><span class="ic">✏️</span><span class="lbl">Auto oder Schnecke</span></a><span class="diff diff-1">●○○</span></label></li>
+<li data-exid="ex2"><span class="chkwrap"><input type="checkbox" class="chk" id="ex2"><label for="ex2" class="chkbox"></label></span><label for="ex2" class="exlabel"><a href="%C3%9Cbungsaufgaben/01%20-%20Einheiten/Weltrekord-Tempo%20%2A.html"><span class="ic">✏️</span><span class="lbl">Weltrekord-Tempo</span></a><span class="diff diff-1">●○○</span></label></li>
+<li data-exid="ex3"><span class="chkwrap"><input type="checkbox" class="chk" id="ex3"><label for="ex3" class="chkbox"></label></span><label for="ex3" class="exlabel"><a href="%C3%9Cbungsaufgaben/01%20-%20Einheiten/Dimensions-Check%20-%20Fallzeit-Formel%20%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Dimensions-Check - Fallzeit-Formel</span></a><span class="diff diff-2">●●○</span></label></li>
+<li data-exid="ex4"><span class="chkwrap"><input type="checkbox" class="chk" id="ex4"><label for="ex4" class="chkbox"></label></span><label for="ex4" class="exlabel"><a href="%C3%9Cbungsaufgaben/01%20-%20Einheiten/Wie%20viele%20Sekunden%20lebst%20du%20%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Wie viele Sekunden lebst du</span></a><span class="diff diff-2">●●○</span></label></li>
+<li data-exid="ex5"><span class="chkwrap"><input type="checkbox" class="chk" id="ex5"><label for="ex5" class="chkbox"></label></span><label for="ex5" class="exlabel"><a href="%C3%9Cbungsaufgaben/01%20-%20Einheiten/Planck-L%C3%A4nge%20vs.%20Blauwal%20%2A%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Planck-Länge vs. Blauwal</span></a><span class="diff diff-3">●●●</span></label></li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<article class="row">
+  <div class="row-head">
+    <div class="badge">02</div>
+    <h2>Diagramme, Graphen und Fehler</h2>
+  </div>
+  <div class="row-body">
+    <div class="col">
+      <div class="col-label">📘 Vorlesung</div>
+      <ul>
+<li><a href="Vorlesungen/02%20-%20Diagramme%2C%20Graphen%20und%20Fehler/NWG1%2002%20-%20Diagramme%2C%20Graphen%20und%20Fehler.pdf"><span class="ic">📄</span><span class="lbl">NWG1 02 - Diagramme, Graphen und Fehler</span></a></li>
+<li><a href="Vorlesungen/02%20-%20Diagramme%2C%20Graphen%20und%20Fehler/GeoGebra%20-%20Die%20Gau%C3%9F%27sche%20Normalverteilung%20als%20Fehlerverteilung.html"><span class="ic">🔗</span><span class="lbl">GeoGebra - Die Gauß'sche Normalverteilung als Fehlerverteilung</span></a></li>
+<li><a href="Vorlesungen/02%20-%20Diagramme%2C%20Graphen%20und%20Fehler/GeoGebra%20Regression%20und%20Fehlerma%C3%9F.html"><span class="ic">🔗</span><span class="lbl">GeoGebra Regression und Fehlermaß</span></a></li>
+<li><a href="Vorlesungen/02%20-%20Diagramme%2C%20Graphen%20und%20Fehler/Holzklotz.xlsx"><span class="ic">📊</span><span class="lbl">Holzklotz</span></a></li>
+      </ul>
+    </div>
+    <div class="col">
+      <div class="col-label">✏️ Übungsaufgaben</div>
+      <ul class="tasklist">
+<li data-exid="ex6"><span class="chkwrap"><input type="checkbox" class="chk" id="ex6"><label for="ex6" class="chkbox"></label></span><label for="ex6" class="exlabel"><a href="%C3%9Cbungsaufgaben/02%20-%20Diagramme%2C%20Graphen%20und%20Fehler/Ausrei%C3%9Fer%20im%20Labor%20%2A.html"><span class="ic">✏️</span><span class="lbl">Ausreißer im Labor</span></a><span class="diff diff-1">●○○</span></label></li>
+<li data-exid="ex7"><span class="chkwrap"><input type="checkbox" class="chk" id="ex7"><label for="ex7" class="chkbox"></label></span><label for="ex7" class="exlabel"><a href="%C3%9Cbungsaufgaben/02%20-%20Diagramme%2C%20Graphen%20und%20Fehler/Pendel-Messreihe%20-%20Mittelwert%20%26%20Streuung%20%2A.html"><span class="ic">✏️</span><span class="lbl">Pendel-Messreihe - Mittelwert & Streuung</span></a><span class="diff diff-1">●○○</span></label></li>
+<li data-exid="ex8"><span class="chkwrap"><input type="checkbox" class="chk" id="ex8"><label for="ex8" class="chkbox"></label></span><label for="ex8" class="exlabel"><a href="%C3%9Cbungsaufgaben/02%20-%20Diagramme%2C%20Graphen%20und%20Fehler/Federkonstante%20per%20Regression%20%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Federkonstante per Regression</span></a><span class="diff diff-2">●●○</span></label></li>
+<li data-exid="ex9"><span class="chkwrap"><input type="checkbox" class="chk" id="ex9"><label for="ex9" class="chkbox"></label></span><label for="ex9" class="exlabel"><a href="%C3%9Cbungsaufgaben/02%20-%20Diagramme%2C%20Graphen%20und%20Fehler/Fehlerfortpflanzung%20-%20Dichte%20eines%20W%C3%BCrfels%20%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Fehlerfortpflanzung - Dichte eines Würfels</span></a><span class="diff diff-2">●●○</span></label></li>
+<li data-exid="ex10"><span class="chkwrap"><input type="checkbox" class="chk" id="ex10"><label for="ex10" class="chkbox"></label></span><label for="ex10" class="exlabel"><a href="%C3%9Cbungsaufgaben/02%20-%20Diagramme%2C%20Graphen%20und%20Fehler/Wie%20oft%20musst%20du%20messen%20%2A%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Wie oft musst du messen</span></a><span class="diff diff-3">●●●</span></label></li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<article class="row">
+  <div class="row-head">
+    <div class="badge">03</div>
+    <h2>Ein Atom</h2>
+  </div>
+  <div class="row-body">
+    <div class="col">
+      <div class="col-label">📘 Vorlesung</div>
+      <ul>
+<li><a href="Vorlesungen/03%20-%20Ein%20Atom/NWG1%2003%20-%20Atommodelle%20und%20das%20PSE.pdf"><span class="ic">📄</span><span class="lbl">NWG1 03 - Atommodelle und das PSE</span></a></li>
+<li><a href="Vorlesungen/03%20-%20Ein%20Atom/Der%20Atomkern/Bau%20Dir%20ein%20Atom%21.html"><span class="ic">🔗</span><span class="lbl">Der Atomkern – Bau Dir ein Atom!</span></a></li>
+<li><a href="Vorlesungen/03%20-%20Ein%20Atom/Der%20Atomkern/Das%20Rutherford-Streuexperiment.html"><span class="ic">🔗</span><span class="lbl">Der Atomkern – Das Rutherford-Streuexperiment</span></a></li>
+<li><a href="Vorlesungen/03%20-%20Ein%20Atom/Der%20Atomkern/Radioaktivit%C3%A4t.html"><span class="ic">🔗</span><span class="lbl">Der Atomkern – Radioaktivität</span></a></li>
+      </ul>
+    </div>
+    <div class="col">
+      <div class="col-label">✏️ Übungsaufgaben</div>
+      <ul class="tasklist">
+<li data-exid="ex11"><span class="chkwrap"><input type="checkbox" class="chk" id="ex11"><label for="ex11" class="chkbox"></label></span><label for="ex11" class="exlabel"><a href="%C3%9Cbungsaufgaben/03%20-%20Ein%20Atom/Das%20Mol%20%2A.html"><span class="ic">✏️</span><span class="lbl">Das Mol</span></a><span class="diff diff-1">●○○</span></label></li>
+<li data-exid="ex12"><span class="chkwrap"><input type="checkbox" class="chk" id="ex12"><label for="ex12" class="chkbox"></label></span><label for="ex12" class="exlabel"><a href="%C3%9Cbungsaufgaben/03%20-%20Ein%20Atom/Goldkette%20%2A.html"><span class="ic">✏️</span><span class="lbl">Goldkette</span></a><span class="diff diff-1">●○○</span></label></li>
+<li data-exid="ex13"><span class="chkwrap"><input type="checkbox" class="chk" id="ex13"><label for="ex13" class="chkbox"></label></span><label for="ex13" class="exlabel"><a href="%C3%9Cbungsaufgaben/03%20-%20Ein%20Atom/Ionisierungsenergie-Trend%20%2A.html"><span class="ic">✏️</span><span class="lbl">Ionisierungsenergie-Trend</span></a><span class="diff diff-1">●○○</span></label></li>
+<li data-exid="ex14"><span class="chkwrap"><input type="checkbox" class="chk" id="ex14"><label for="ex14" class="chkbox"></label></span><label for="ex14" class="exlabel"><a href="%C3%9Cbungsaufgaben/03%20-%20Ein%20Atom/Wo%20im%20PSE%20%2A.html"><span class="ic">✏️</span><span class="lbl">Wo im PSE</span></a><span class="diff diff-1">●○○</span></label></li>
+<li data-exid="ex15"><span class="chkwrap"><input type="checkbox" class="chk" id="ex15"><label for="ex15" class="chkbox"></label></span><label for="ex15" class="exlabel"><a href="%C3%9Cbungsaufgaben/03%20-%20Ein%20Atom/Elektroauto%20laden%20%28in%20Mol%21%29%20%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Elektroauto laden (in Mol!)</span></a><span class="diff diff-2">●●○</span></label></li>
+<li data-exid="ex16"><span class="chkwrap"><input type="checkbox" class="chk" id="ex16"><label for="ex16" class="chkbox"></label></span><label for="ex16" class="exlabel"><a href="%C3%9Cbungsaufgaben/03%20-%20Ein%20Atom/Radiokarbondatierung%20%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Radiokarbondatierung</span></a><span class="diff diff-2">●●○</span></label></li>
+<li data-exid="ex17"><span class="chkwrap"><input type="checkbox" class="chk" id="ex17"><label for="ex17" class="chkbox"></label></span><label for="ex17" class="exlabel"><a href="%C3%9Cbungsaufgaben/03%20-%20Ein%20Atom/Sandkorn%20voller%20Atome%20%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Sandkorn voller Atome</span></a><span class="diff diff-2">●●○</span></label></li>
+<li data-exid="ex18"><span class="chkwrap"><input type="checkbox" class="chk" id="ex18"><label for="ex18" class="chkbox"></label></span><label for="ex18" class="exlabel"><a href="%C3%9Cbungsaufgaben/03%20-%20Ein%20Atom/Dichte%20von%20Gold%20%2A%2A%2A/Dichte%20von%20Gold%20%2A%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Dichte von Gold</span></a><span class="diff diff-3">●●●</span></label></li>
+<li data-exid="ex19"><span class="chkwrap"><input type="checkbox" class="chk" id="ex19"><label for="ex19" class="chkbox"></label></span><label for="ex19" class="exlabel"><a href="%C3%9Cbungsaufgaben/03%20-%20Ein%20Atom/Massendefekt%20von%20Helium%20%2A%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Massendefekt von Helium</span></a><span class="diff diff-3">●●●</span></label></li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<article class="row">
+  <div class="row-head">
+    <div class="badge">04</div>
+    <h2>Aggregatzustände</h2>
+  </div>
+  <div class="row-body">
+    <div class="col">
+      <div class="col-label">📘 Vorlesung</div>
+      <ul>
+<li><a href="Vorlesungen/04%20-%20Aggregatzust%C3%A4nde/NWG1%2004%20-%20Vom%20Atom%20zum%20Molek%C3%BCl.pdf"><span class="ic">📄</span><span class="lbl">NWG1 04 - Vom Atom zum Molekül</span></a></li>
+<li><a href="Vorlesungen/04%20-%20Aggregatzust%C3%A4nde/Aggregatzust%C3%A4nde.html"><span class="ic">🔗</span><span class="lbl">Aggregatzustände</span></a></li>
+<li><a href="Vorlesungen/04%20-%20Aggregatzust%C3%A4nde/van-der-Waals-Kr%C3%A4fte.html"><span class="ic">🔗</span><span class="lbl">van-der-Waals-Kräfte</span></a></li>
+      </ul>
+    </div>
+    <div class="col">
+      <div class="col-label">✏️ Übungsaufgaben</div>
+      <ul class="tasklist">
+<li data-exid="ex20"><span class="chkwrap"><input type="checkbox" class="chk" id="ex20"><label for="ex20" class="chkbox"></label></span><label for="ex20" class="exlabel"><a href="%C3%9Cbungsaufgaben/04%20-%20Aggregatzust%C3%A4nde/Dichte%20von%20Wasser.html"><span class="ic">✏️</span><span class="lbl">Dichte von Wasser</span></a></label></li>
+<li data-exid="ex21"><span class="chkwrap"><input type="checkbox" class="chk" id="ex21"><label for="ex21" class="chkbox"></label></span><label for="ex21" class="exlabel"><a href="%C3%9Cbungsaufgaben/04%20-%20Aggregatzust%C3%A4nde/Quiz%20van-der-Waals-Kr%C3%B6fte.html"><span class="ic">✏️</span><span class="lbl">Quiz van-der-Waals-Kröfte</span></a></label></li>
+<li data-exid="ex22"><span class="chkwrap"><input type="checkbox" class="chk" id="ex22"><label for="ex22" class="chkbox"></label></span><label for="ex22" class="exlabel"><a href="%C3%9Cbungsaufgaben/04%20-%20Aggregatzust%C3%A4nde/Eisw%C3%BCrfel%20im%20Getr%C3%A4nk%20%2A.html"><span class="ic">✏️</span><span class="lbl">Eiswürfel im Getränk</span></a><span class="diff diff-1">●○○</span></label></li>
+<li data-exid="ex23"><span class="chkwrap"><input type="checkbox" class="chk" id="ex23"><label for="ex23" class="chkbox"></label></span><label for="ex23" class="exlabel"><a href="%C3%9Cbungsaufgaben/04%20-%20Aggregatzust%C3%A4nde/Siedepunkt-Trend%20der%20Halogene%20%2A.html"><span class="ic">✏️</span><span class="lbl">Siedepunkt-Trend der Halogene</span></a><span class="diff diff-1">●○○</span></label></li>
+<li data-exid="ex24"><span class="chkwrap"><input type="checkbox" class="chk" id="ex24"><label for="ex24" class="chkbox"></label></span><label for="ex24" class="exlabel"><a href="%C3%9Cbungsaufgaben/04%20-%20Aggregatzust%C3%A4nde/Nudelwasser%20-%20Wie%20lange%20dauert%20das%20Kochen%20%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Nudelwasser - Wie lange dauert das Kochen</span></a><span class="diff diff-2">●●○</span></label></li>
+<li data-exid="ex25"><span class="chkwrap"><input type="checkbox" class="chk" id="ex25"><label for="ex25" class="chkbox"></label></span><label for="ex25" class="exlabel"><a href="%C3%9Cbungsaufgaben/04%20-%20Aggregatzust%C3%A4nde/Trockeneis-R%C3%A4tsel%20%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Trockeneis-Rätsel</span></a><span class="diff diff-2">●●○</span></label></li>
+<li data-exid="ex26"><span class="chkwrap"><input type="checkbox" class="chk" id="ex26"><label for="ex26" class="chkbox"></label></span><label for="ex26" class="exlabel"><a href="%C3%9Cbungsaufgaben/04%20-%20Aggregatzust%C3%A4nde/Druckkochtopf-Physik%20%2A%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Druckkochtopf-Physik</span></a><span class="diff diff-3">●●●</span></label></li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<article class="row">
+  <div class="row-head">
+    <div class="badge">05</div>
+    <h2>Bindungen</h2>
+  </div>
+  <div class="row-body">
+    <div class="col">
+      <div class="col-label">📘 Vorlesung</div>
+      <ul>
+<li><a href="Vorlesungen/05%20-%20Bindungen/NWG1%2005%20-%20Vom%20Atom%20zum%20Molek%C3%BCl%20II.pdf"><span class="ic">📄</span><span class="lbl">NWG1 05 - Vom Atom zum Molekül II</span></a></li>
+      </ul>
+    </div>
+    <div class="col">
+      <div class="col-label">✏️ Übungsaufgaben</div>
+      <ul class="tasklist">
+<li data-exid="ex27"><span class="chkwrap"><input type="checkbox" class="chk" id="ex27"><label for="ex27" class="chkbox"></label></span><label for="ex27" class="exlabel"><a href="%C3%9Cbungsaufgaben/05%20-%20Bindungen/Quiz%20Die%20Oktett-Regel.html"><span class="ic">✏️</span><span class="lbl">Quiz Die Oktett-Regel</span></a></label></li>
+<li data-exid="ex28"><span class="chkwrap"><input type="checkbox" class="chk" id="ex28"><label for="ex28" class="chkbox"></label></span><label for="ex28" class="exlabel"><a href="%C3%9Cbungsaufgaben/05%20-%20Bindungen/Ionisch%2C%20polar%20oder%20unpolar%20%2A.html"><span class="ic">✏️</span><span class="lbl">Ionisch, polar oder unpolar</span></a><span class="diff diff-1">●○○</span></label></li>
+<li data-exid="ex29"><span class="chkwrap"><input type="checkbox" class="chk" id="ex29"><label for="ex29" class="chkbox"></label></span><label for="ex29" class="exlabel"><a href="%C3%9Cbungsaufgaben/05%20-%20Bindungen/Lewis-Strukturen%20zeichnen%20%2A.html"><span class="ic">✏️</span><span class="lbl">Lewis-Strukturen zeichnen</span></a><span class="diff diff-1">●○○</span></label></li>
+<li data-exid="ex30"><span class="chkwrap"><input type="checkbox" class="chk" id="ex30"><label for="ex30" class="chkbox"></label></span><label for="ex30" class="exlabel"><a href="%C3%9Cbungsaufgaben/05%20-%20Bindungen/%C3%9Cbung%20Einfache%20Molek%C3%BCle%20%2A.html"><span class="ic">✏️</span><span class="lbl">Übung Einfache Moleküle</span></a><span class="diff diff-1">●○○</span></label></li>
+<li data-exid="ex31"><span class="chkwrap"><input type="checkbox" class="chk" id="ex31"><label for="ex31" class="chkbox"></label></span><label for="ex31" class="exlabel"><a href="%C3%9Cbungsaufgaben/05%20-%20Bindungen/%C3%9Cbung%20Komplexere%20Molek%C3%BCle%20%2A.html"><span class="ic">✏️</span><span class="lbl">Übung Komplexere Moleküle</span></a><span class="diff diff-1">●○○</span></label></li>
+<li data-exid="ex32"><span class="chkwrap"><input type="checkbox" class="chk" id="ex32"><label for="ex32" class="chkbox"></label></span><label for="ex32" class="exlabel"><a href="%C3%9Cbungsaufgaben/05%20-%20Bindungen/Molek%C3%BClgeometrie%20mit%20VSEPR%20%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Molekülgeometrie mit VSEPR</span></a><span class="diff diff-2">●●○</span></label></li>
+<li data-exid="ex33"><span class="chkwrap"><input type="checkbox" class="chk" id="ex33"><label for="ex33" class="chkbox"></label></span><label for="ex33" class="exlabel"><a href="%C3%9Cbungsaufgaben/05%20-%20Bindungen/Warum%20schwimmt%20Eis%20%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Warum schwimmt Eis</span></a><span class="diff diff-2">●●○</span></label></li>
+<li data-exid="ex34"><span class="chkwrap"><input type="checkbox" class="chk" id="ex34"><label for="ex34" class="chkbox"></label></span><label for="ex34" class="exlabel"><a href="%C3%9Cbungsaufgaben/05%20-%20Bindungen/Gitterenergie%20von%20Kochsalz%20%2A%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Gitterenergie von Kochsalz</span></a><span class="diff diff-3">●●●</span></label></li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<article class="row">
+  <div class="row-head">
+    <div class="badge">06</div>
+    <h2>Bewegung in 1d und 3d</h2>
+  </div>
+  <div class="row-body">
+    <div class="col">
+      <div class="col-label">📘 Vorlesung</div>
+      <ul>
+<li><a href="Vorlesungen/06%20-%20Bewegung%20in%201d%20und%203d/NWG1%2006%20-%20Bewegung%20in%201d%20und%203d.pdf"><span class="ic">📄</span><span class="lbl">NWG1 06 - Bewegung in 1d und 3d</span></a></li>
+      </ul>
+    </div>
+    <div class="col">
+      <div class="col-label">✏️ Übungsaufgaben</div>
+      <ul class="tasklist">
+<li data-exid="ex35"><span class="chkwrap"><input type="checkbox" class="chk" id="ex35"><label for="ex35" class="chkbox"></label></span><label for="ex35" class="exlabel"><a href="%C3%9Cbungsaufgaben/06%20-%20Bewegung%20in%201d%20und%203d/Bremsweg-Rechner%20%2A.html"><span class="ic">✏️</span><span class="lbl">Bremsweg-Rechner</span></a><span class="diff diff-1">●○○</span></label></li>
+<li data-exid="ex36"><span class="chkwrap"><input type="checkbox" class="chk" id="ex36"><label for="ex36" class="chkbox"></label></span><label for="ex36" class="exlabel"><a href="%C3%9Cbungsaufgaben/06%20-%20Bewegung%20in%201d%20und%203d/Steigung%20ablesen%20-%20v-t-Diagramm%20%2A.html"><span class="ic">✏️</span><span class="lbl">Steigung ablesen - v-t-Diagramm</span></a><span class="diff diff-1">●○○</span></label></li>
+<li data-exid="ex37"><span class="chkwrap"><input type="checkbox" class="chk" id="ex37"><label for="ex37" class="chkbox"></label></span><label for="ex37" class="exlabel"><a href="%C3%9Cbungsaufgaben/06%20-%20Bewegung%20in%201d%20und%203d/Geschwindigkeit%20aus%20Beschleunigung%20%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Geschwindigkeit aus Beschleunigung</span></a><span class="diff diff-2">●●○</span></label></li>
+<li data-exid="ex38"><span class="chkwrap"><input type="checkbox" class="chk" id="ex38"><label for="ex38" class="chkbox"></label></span><label for="ex38" class="exlabel"><a href="%C3%9Cbungsaufgaben/06%20-%20Bewegung%20in%201d%20und%203d/Wurfparabel%20beim%20Basketball%20%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Wurfparabel beim Basketball</span></a><span class="diff diff-2">●●○</span></label></li>
+<li data-exid="ex39"><span class="chkwrap"><input type="checkbox" class="chk" id="ex39"><label for="ex39" class="chkbox"></label></span><label for="ex39" class="exlabel"><a href="%C3%9Cbungsaufgaben/06%20-%20Bewegung%20in%201d%20und%203d/Doppelt%20so%20schnell%2C%20viermal%20so%20weit%20%2A%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Doppelt so schnell, viermal so weit</span></a><span class="diff diff-3">●●●</span></label></li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<article class="row">
+  <div class="row-head">
+    <div class="badge">06</div>
+    <h2>Festkörper</h2>
+  </div>
+  <div class="row-body">
+    <div class="col">
+      <div class="col-label">📘 Vorlesung</div>
+      <ul>
+<li><a href="Vorlesungen/06%20-%20Festk%C3%B6rper/NWG1%2006%20-%20Festk%C3%B6rper.pdf"><span class="ic">📄</span><span class="lbl">NWG1 06 - Festkörper</span></a></li>
+      </ul>
+    </div>
+    <div class="col">
+      <div class="col-label">✏️ Übungsaufgaben</div>
+      <ul class="tasklist">
+<li data-exid="ex40"><span class="chkwrap"><input type="checkbox" class="chk" id="ex40"><label for="ex40" class="chkbox"></label></span><label for="ex40" class="exlabel"><a href="%C3%9Cbungsaufgaben/06%20-%20Festk%C3%B6rper/Metall%2C%20Isolator%20oder%20Halbleiter%20%2A.html"><span class="ic">✏️</span><span class="lbl">Metall, Isolator oder Halbleiter</span></a><span class="diff diff-1">●○○</span></label></li>
+<li data-exid="ex41"><span class="chkwrap"><input type="checkbox" class="chk" id="ex41"><label for="ex41" class="chkbox"></label></span><label for="ex41" class="exlabel"><a href="%C3%9Cbungsaufgaben/06%20-%20Festk%C3%B6rper/Silizium%20dotieren%20%2A.html"><span class="ic">✏️</span><span class="lbl">Silizium dotieren</span></a><span class="diff diff-1">●○○</span></label></li>
+<li data-exid="ex42"><span class="chkwrap"><input type="checkbox" class="chk" id="ex42"><label for="ex42" class="chkbox"></label></span><label for="ex42" class="exlabel"><a href="%C3%9Cbungsaufgaben/06%20-%20Festk%C3%B6rper/Fermi-Energie%20von%20Kupfer%20%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Fermi-Energie von Kupfer</span></a><span class="diff diff-2">●●○</span></label></li>
+<li data-exid="ex43"><span class="chkwrap"><input type="checkbox" class="chk" id="ex43"><label for="ex43" class="chkbox"></label></span><label for="ex43" class="exlabel"><a href="%C3%9Cbungsaufgaben/06%20-%20Festk%C3%B6rper/Leitf%C3%A4higkeit%20bei%20Erw%C3%A4rmung%20%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Leitfähigkeit bei Erwärmung</span></a><span class="diff diff-2">●●○</span></label></li>
+<li data-exid="ex44"><span class="chkwrap"><input type="checkbox" class="chk" id="ex44"><label for="ex44" class="chkbox"></label></span><label for="ex44" class="exlabel"><a href="%C3%9Cbungsaufgaben/06%20-%20Festk%C3%B6rper/Boltzmann-Sprung%20%C3%BCber%20die%20Bandl%C3%BCcke%20%2A%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Boltzmann-Sprung über die Bandlücke</span></a><span class="diff diff-3">●●●</span></label></li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<article class="row">
+  <div class="row-head">
+    <div class="badge">08</div>
+    <h2>Die Newtonschen Gesetze</h2>
+  </div>
+  <div class="row-body">
+    <div class="col">
+      <div class="col-label">📘 Vorlesung</div>
+      <ul>
+<li><a href="Vorlesungen/08%20-%20Die%20Newtonschen%20Gesetze/NWG1%2008%20-%20Newtons%20Gesetze.pdf"><span class="ic">📄</span><span class="lbl">NWG1 08 - Newtons Gesetze</span></a></li>
+      </ul>
+    </div>
+    <div class="col">
+      <div class="col-label">✏️ Übungsaufgaben</div>
+      <ul class="tasklist">
+<li data-exid="ex45"><span class="chkwrap"><input type="checkbox" class="chk" id="ex45"><label for="ex45" class="chkbox"></label></span><label for="ex45" class="exlabel"><a href="%C3%9Cbungsaufgaben/08%20-%20Die%20Newtonschen%20Gesetze/Einkaufswagen%20anschieben%20%2A.html"><span class="ic">✏️</span><span class="lbl">Einkaufswagen anschieben</span></a><span class="diff diff-1">●○○</span></label></li>
+<li data-exid="ex46"><span class="chkwrap"><input type="checkbox" class="chk" id="ex46"><label for="ex46" class="chkbox"></label></span><label for="ex46" class="exlabel"><a href="%C3%9Cbungsaufgaben/08%20-%20Die%20Newtonschen%20Gesetze/Haften%20oder%20Rutschen%20%2A.html"><span class="ic">✏️</span><span class="lbl">Haften oder Rutschen</span></a><span class="diff diff-1">●○○</span></label></li>
+<li data-exid="ex47"><span class="chkwrap"><input type="checkbox" class="chk" id="ex47"><label for="ex47" class="chkbox"></label></span><label for="ex47" class="exlabel"><a href="%C3%9Cbungsaufgaben/08%20-%20Die%20Newtonschen%20Gesetze/Kiste%20auf%20der%20Rampe%20%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Kiste auf der Rampe</span></a><span class="diff diff-2">●●○</span></label></li>
+<li data-exid="ex48"><span class="chkwrap"><input type="checkbox" class="chk" id="ex48"><label for="ex48" class="chkbox"></label></span><label for="ex48" class="exlabel"><a href="%C3%9Cbungsaufgaben/08%20-%20Die%20Newtonschen%20Gesetze/R%C3%BCcksto%C3%9F%20beim%20Feuerwerk%20%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Rückstoß beim Feuerwerk</span></a><span class="diff diff-2">●●○</span></label></li>
+<li data-exid="ex49"><span class="chkwrap"><input type="checkbox" class="chk" id="ex49"><label for="ex49" class="chkbox"></label></span><label for="ex49" class="exlabel"><a href="%C3%9Cbungsaufgaben/08%20-%20Die%20Newtonschen%20Gesetze/Scheingewicht%20im%20Fahrstuhl%20%2A%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Scheingewicht im Fahrstuhl</span></a><span class="diff diff-3">●●●</span></label></li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<article class="row">
+  <div class="row-head">
+    <div class="badge">09</div>
+    <h2>Energie</h2>
+  </div>
+  <div class="row-body">
+    <div class="col">
+      <div class="col-label">📘 Vorlesung</div>
+      <ul>
+<li><a href="Vorlesungen/09%20-%20Energie/NWG1%2009%20-%20Energie.pdf"><span class="ic">📄</span><span class="lbl">NWG1 09 - Energie</span></a></li>
+      </ul>
+    </div>
+    <div class="col">
+      <div class="col-label">✏️ Übungsaufgaben</div>
+      <ul class="tasklist">
+<li data-exid="ex50"><span class="chkwrap"><input type="checkbox" class="chk" id="ex50"><label for="ex50" class="chkbox"></label></span><label for="ex50" class="exlabel"><a href="%C3%9Cbungsaufgaben/09%20-%20Energie/Achterbahn%20-%20H%C3%B6chstgeschwindigkeit%20%2A.html"><span class="ic">✏️</span><span class="lbl">Achterbahn - Höchstgeschwindigkeit</span></a><span class="diff diff-1">●○○</span></label></li>
+<li data-exid="ex51"><span class="chkwrap"><input type="checkbox" class="chk" id="ex51"><label for="ex51" class="chkbox"></label></span><label for="ex51" class="exlabel"><a href="%C3%9Cbungsaufgaben/09%20-%20Energie/Doppeltes%20Tempo%2C%20vierfache%20Energie%20%2A.html"><span class="ic">✏️</span><span class="lbl">Doppeltes Tempo, vierfache Energie</span></a><span class="diff diff-1">●○○</span></label></li>
+<li data-exid="ex52"><span class="chkwrap"><input type="checkbox" class="chk" id="ex52"><label for="ex52" class="chkbox"></label></span><label for="ex52" class="exlabel"><a href="%C3%9Cbungsaufgaben/09%20-%20Energie/Katapult%20-%20Federenergie%20in%20Bewegung%20%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Katapult - Federenergie in Bewegung</span></a><span class="diff diff-2">●●○</span></label></li>
+<li data-exid="ex53"><span class="chkwrap"><input type="checkbox" class="chk" id="ex53"><label for="ex53" class="chkbox"></label></span><label for="ex53" class="exlabel"><a href="%C3%9Cbungsaufgaben/09%20-%20Energie/Pendel-Energie%20-%20Wie%20schnell%20im%20tiefsten%20Punkt%20%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Pendel-Energie - Wie schnell im tiefsten Punkt</span></a><span class="diff diff-2">●●○</span></label></li>
+<li data-exid="ex54"><span class="chkwrap"><input type="checkbox" class="chk" id="ex54"><label for="ex54" class="chkbox"></label></span><label for="ex54" class="exlabel"><a href="%C3%9Cbungsaufgaben/09%20-%20Energie/E-Bike%20-%20Wie%20viele%20H%C3%B6henmeter%20mit%20einer%20Akkuladung%20%2A%2A%2A.html"><span class="ic">✏️</span><span class="lbl">E-Bike - Wie viele Höhenmeter mit einer Akkuladung</span></a><span class="diff diff-3">●●●</span></label></li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<article class="row">
+  <div class="row-head">
+    <div class="badge">10</div>
+    <h2>Gravitation</h2>
+  </div>
+  <div class="row-body">
+    <div class="col">
+      <div class="col-label">📘 Vorlesung</div>
+      <ul>
+<li><a href="Vorlesungen/10%20-%20Gravitation/NWG1%2010%20-%20Gravitation.pdf"><span class="ic">📄</span><span class="lbl">NWG1 10 - Gravitation</span></a></li>
+      </ul>
+    </div>
+    <div class="col">
+      <div class="col-label">✏️ Übungsaufgaben</div>
+      <ul class="tasklist">
+<li data-exid="ex55"><span class="chkwrap"><input type="checkbox" class="chk" id="ex55"><label for="ex55" class="chkbox"></label></span><label for="ex55" class="exlabel"><a href="%C3%9Cbungsaufgaben/10%20-%20Gravitation/Voyager%201/Voyager%201.html"><span class="ic">✏️</span><span class="lbl">Voyager 1</span></a></label></li>
+<li data-exid="ex56"><span class="chkwrap"><input type="checkbox" class="chk" id="ex56"><label for="ex56" class="chkbox"></label></span><label for="ex56" class="exlabel"><a href="%C3%9Cbungsaufgaben/10%20-%20Gravitation/Dein%20Gewicht%20auf%20dem%20Mond%20%2A.html"><span class="ic">✏️</span><span class="lbl">Dein Gewicht auf dem Mond</span></a><span class="diff diff-1">●○○</span></label></li>
+<li data-exid="ex57"><span class="chkwrap"><input type="checkbox" class="chk" id="ex57"><label for="ex57" class="chkbox"></label></span><label for="ex57" class="exlabel"><a href="%C3%9Cbungsaufgaben/10%20-%20Gravitation/Die%20ISS%20-%20Tempo%20und%20Umlaufzeit%20%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Die ISS - Tempo und Umlaufzeit</span></a><span class="diff diff-2">●●○</span></label></li>
+<li data-exid="ex58"><span class="chkwrap"><input type="checkbox" class="chk" id="ex58"><label for="ex58" class="chkbox"></label></span><label for="ex58" class="exlabel"><a href="%C3%9Cbungsaufgaben/10%20-%20Gravitation/Fluchtgeschwindigkeit%20von%20der%20Erde%20%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Fluchtgeschwindigkeit von der Erde</span></a><span class="diff diff-2">●●○</span></label></li>
+<li data-exid="ex59"><span class="chkwrap"><input type="checkbox" class="chk" id="ex59"><label for="ex59" class="chkbox"></label></span><label for="ex59" class="exlabel"><a href="%C3%9Cbungsaufgaben/10%20-%20Gravitation/Gezeitenkraft%20-%20Warum%20zieht%20der%20Mond%20st%C3%A4rker%20am%20Meer%20als%20die%20Sonne%20%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Gezeitenkraft - Warum zieht der Mond stärker am Meer als die Sonne</span></a><span class="diff diff-2">●●○</span></label></li>
+<li data-exid="ex60"><span class="chkwrap"><input type="checkbox" class="chk" id="ex60"><label for="ex60" class="chkbox"></label></span><label for="ex60" class="exlabel"><a href="%C3%9Cbungsaufgaben/10%20-%20Gravitation/Geostation%C3%A4rer%20Satellit%20-%20In%20welcher%20H%C3%B6he%20%2A%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Geostationärer Satellit - In welcher Höhe</span></a><span class="diff diff-3">●●●</span></label></li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<article class="row">
+  <div class="row-head">
+    <div class="badge">11</div>
+    <h2>Rotation</h2>
+  </div>
+  <div class="row-body">
+    <div class="col">
+      <div class="col-label">📘 Vorlesung</div>
+      <ul>
+<li><a href="Vorlesungen/11%20-%20Rotation/NWG1%2011%20-%20Rotation.pdf"><span class="ic">📄</span><span class="lbl">NWG1 11 - Rotation</span></a></li>
+      </ul>
+    </div>
+    <div class="col">
+      <div class="col-label">✏️ Übungsaufgaben</div>
+      <ul class="tasklist">
+<li data-exid="ex61"><span class="chkwrap"><input type="checkbox" class="chk" id="ex61"><label for="ex61" class="chkbox"></label></span><label for="ex61" class="exlabel"><a href="%C3%9Cbungsaufgaben/11%20-%20Rotation/Drehmoment%20am%20Schraubenschl%C3%BCssel%20%2A.html"><span class="ic">✏️</span><span class="lbl">Drehmoment am Schraubenschlüssel</span></a><span class="diff diff-1">●○○</span></label></li>
+<li data-exid="ex62"><span class="chkwrap"><input type="checkbox" class="chk" id="ex62"><label for="ex62" class="chkbox"></label></span><label for="ex62" class="exlabel"><a href="%C3%9Cbungsaufgaben/11%20-%20Rotation/Scheibe%20oder%20Ring%20%2A.html"><span class="ic">✏️</span><span class="lbl">Scheibe oder Ring</span></a><span class="diff diff-1">●○○</span></label></li>
+<li data-exid="ex63"><span class="chkwrap"><input type="checkbox" class="chk" id="ex63"><label for="ex63" class="chkbox"></label></span><label for="ex63" class="exlabel"><a href="%C3%9Cbungsaufgaben/11%20-%20Rotation/Fahrrad-%C3%9Cbersetzung%20-%20Drehmoment%20am%20Hinterrad%20%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Fahrrad-Übersetzung - Drehmoment am Hinterrad</span></a><span class="diff diff-2">●●○</span></label></li>
+<li data-exid="ex64"><span class="chkwrap"><input type="checkbox" class="chk" id="ex64"><label for="ex64" class="chkbox"></label></span><label for="ex64" class="exlabel"><a href="%C3%9Cbungsaufgaben/11%20-%20Rotation/Pirouette%20-%20Drehimpulserhaltung%20%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Pirouette - Drehimpulserhaltung</span></a><span class="diff diff-2">●●○</span></label></li>
+<li data-exid="ex65"><span class="chkwrap"><input type="checkbox" class="chk" id="ex65"><label for="ex65" class="chkbox"></label></span><label for="ex65" class="exlabel"><a href="%C3%9Cbungsaufgaben/11%20-%20Rotation/Wettrennen%20der%20Kugeln%20-%20Rollen%20vs.%20Rutschen%20%2A%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Wettrennen der Kugeln - Rollen vs. Rutschen</span></a><span class="diff diff-3">●●●</span></label></li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<article class="row">
+  <div class="row-head">
+    <div class="badge">12</div>
+    <h2>Impuls</h2>
+  </div>
+  <div class="row-body">
+    <div class="col">
+      <div class="col-label">📘 Vorlesung</div>
+      <ul>
+<li><a href="Vorlesungen/12%20-%20Impuls/NWG1%2012%20-%20Impuls.pdf"><span class="ic">📄</span><span class="lbl">NWG1 12 - Impuls</span></a></li>
+      </ul>
+    </div>
+    <div class="col">
+      <div class="col-label">✏️ Übungsaufgaben</div>
+      <ul class="tasklist">
+<li data-exid="ex66"><span class="chkwrap"><input type="checkbox" class="chk" id="ex66"><label for="ex66" class="chkbox"></label></span><label for="ex66" class="exlabel"><a href="%C3%9Cbungsaufgaben/12%20-%20Impuls/Frontalzusammensto%C3%9F%20%2A.html"><span class="ic">✏️</span><span class="lbl">Frontalzusammenstoß</span></a><span class="diff diff-1">●○○</span></label></li>
+<li data-exid="ex67"><span class="chkwrap"><input type="checkbox" class="chk" id="ex67"><label for="ex67" class="chkbox"></label></span><label for="ex67" class="exlabel"><a href="%C3%9Cbungsaufgaben/12%20-%20Impuls/Kanone%20auf%20dem%20Boot%20%2A.html"><span class="ic">✏️</span><span class="lbl">Kanone auf dem Boot</span></a><span class="diff diff-1">●○○</span></label></li>
+<li data-exid="ex68"><span class="chkwrap"><input type="checkbox" class="chk" id="ex68"><label for="ex68" class="chkbox"></label></span><label for="ex68" class="exlabel"><a href="%C3%9Cbungsaufgaben/12%20-%20Impuls/Elastischer%20Sto%C3%9F%20zweier%20Kugeln%20%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Elastischer Stoß zweier Kugeln</span></a><span class="diff diff-2">●●○</span></label></li>
+<li data-exid="ex69"><span class="chkwrap"><input type="checkbox" class="chk" id="ex69"><label for="ex69" class="chkbox"></label></span><label for="ex69" class="exlabel"><a href="%C3%9Cbungsaufgaben/12%20-%20Impuls/Raketengleichung%20-%20Wie%20schnell%20wird%20die%20Rakete%20%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Raketengleichung - Wie schnell wird die Rakete</span></a><span class="diff diff-2">●●○</span></label></li>
+<li data-exid="ex70"><span class="chkwrap"><input type="checkbox" class="chk" id="ex70"><label for="ex70" class="chkbox"></label></span><label for="ex70" class="exlabel"><a href="%C3%9Cbungsaufgaben/12%20-%20Impuls/Bowling%20-%20Schr%C3%A4ger%20Sto%C3%9F%20%2A%2A%2A.html"><span class="ic">✏️</span><span class="lbl">Bowling - Schräger Stoß</span></a><span class="diff diff-3">●●●</span></label></li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<section class="kv">
+  <h2>🎓 Klausurvorbereitung</h2>
+  <ul>
+<li><a href="Klausurvorbereitung/Online-Ressourcen%20zur%20Vorbereitung.html"><span class="ic">🔗</span><span class="lbl">Online-Ressourcen zur Vorbereitung</span></a></li>
+<li><a href="Klausurvorbereitung/Wie%20lerne%20ich%20f%C3%BCr%20NWG/Wie%20lerne%20ich%20f%C3%BCr%20NWG%20Mindmap.pdf"><span class="ic">📄</span><span class="lbl">Wie lerne ich für NWG Mindmap</span></a></li>
+<li><a href="Klausurvorbereitung/Wie%20lerne%20ich%20f%C3%BCr%20NWG/Wie%20lerne%20ich%20f%C3%BCr%20NWG%20Pr%C3%A4sentation.pdf"><span class="ic">📄</span><span class="lbl">Wie lerne ich für NWG Präsentation</span></a></li>
+<li><a href="Klausurvorbereitung/Wie%20lerne%20ich%20f%C3%BCr%20NWG/Wie%20lerne%20ich%20f%C3%BCr%20NWG.pdf"><span class="ic">📄</span><span class="lbl">Wie lerne ich für NWG</span></a></li>
+  </ul>
+</section>
+<footer>Erstellt mit KI auf Grundlage der Vorlesungsfolien NWG I</footer>
+</div>
+<script>
+(function() {
+  var COOKIE_NAME = "nwg1_progress";
+  var TOTAL = 71;
+
+  function getDone() {
+    var m = document.cookie.match(new RegExp("(?:^|; )" + COOKIE_NAME + "=([^;]*)"));
+    if (!m) return new Set();
+    try {
+      return new Set(decodeURIComponent(m[1]).split(",").filter(Boolean));
+    } catch (e) { return new Set(); }
+  }
+
+  function saveDone(doneSet) {
+    var value = encodeURIComponent(Array.from(doneSet).join(","));
+    var maxAge = 60 * 60 * 24 * 365; // 1 year
+    document.cookie = COOKIE_NAME + "=" + value + "; path=/; max-age=" + maxAge + "; samesite=Lax";
+  }
+
+  function updateProgressStat(doneSet) {
+    var el = document.getElementById("progress-stat");
+    var fill = document.getElementById("progress-fill");
+    if (el) el.textContent = "✅ " + doneSet.size + "/" + TOTAL + " erledigt";
+    if (fill) fill.style.width = (TOTAL ? (doneSet.size / TOTAL * 100) : 0) + "%";
+  }
+
+  function applyState(doneSet) {
+    document.querySelectorAll(".tasklist li[data-exid]").forEach(function(li) {
+      var id = li.getAttribute("data-exid");
+      var checked = doneSet.has(id);
+      var box = li.querySelector(".chk");
+      if (box) box.checked = checked;
+      li.classList.toggle("done", checked);
+    });
+    updateProgressStat(doneSet);
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    var doneSet = getDone();
+    applyState(doneSet);
+
+    document.querySelectorAll(".tasklist .chk").forEach(function(box) {
+      box.addEventListener("change", function() {
+        var li = box.closest("li[data-exid]");
+        var id = li.getAttribute("data-exid");
+        if (box.checked) doneSet.add(id); else doneSet.delete(id);
+        li.classList.toggle("done", box.checked);
+        saveDone(doneSet);
+        updateProgressStat(doneSet);
+      });
+    });
+
+    var resetBtn = document.getElementById("reset-progress");
+    if (resetBtn) {
+      resetBtn.addEventListener("click", function() {
+        if (!confirm("Wirklich den gesamten Fortschritt zurücksetzen?")) return;
+        doneSet = new Set();
+        saveDone(doneSet);
+        applyState(doneSet);
+      });
+    }
+  });
+})();
+</script>
+</body>
+</html>
