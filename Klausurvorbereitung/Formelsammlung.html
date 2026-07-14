@@ -93,6 +93,11 @@ table.ft tr:last-child td { border-bottom: none; }
   border-radius: 10px; padding: 12px 16px; margin: 4px 0 16px; font-size: 14px; line-height: 1.6;
 }
 .callout strong { color: var(--text); }
+.warn {
+  background: var(--hint-bg); border: 1px solid var(--hint-border); color: var(--hint-text);
+  border-radius: 10px; padding: 12px 16px; margin: 4px 0 16px; font-size: 14px; line-height: 1.6;
+}
+.warn strong { color: var(--text); }
 ul.merke { margin: 0 0 6px; padding-left: 20px; font-size: 14.5px; line-height: 1.7; }
 ul.merke li { margin-bottom: 2px; }
 hr.sep { border: none; border-top: 1px dashed var(--border); margin: 18px 0; }
@@ -125,6 +130,7 @@ footer { text-align: center; color: var(--muted); font-size: 12.5px; margin-top:
 <li><a href="#sec11">11. Festkörper</a></li>
 <li><a href="#konstanten">Nützliche Naturkonstanten</a></li>
 <li><a href="#uebersicht">Kompakte Formelübersicht</a></li>
+<li><a href="#translation-rotation">Vergleich Translation ↔ Rotation</a></li>
 </ul>
 </div>
 
@@ -327,8 +333,17 @@ s\cdot\vec{a}=\begin{pmatrix}s\,a_x\\s\,a_y\\s\,a_z\end{pmatrix}$$</p>
 </tbody>
 </table></div>
 
-<h4>Bahn ↔ Drehung</h4>
-<p class="formula">$$v = r\cdot\omega$$</p>
+<h4>Bahn ↔ Drehung (Umrechnung mit $r$)</h4>
+<p>Für einen Punkt im Abstand $r$ von der Drehachse hängen die <strong>kinematischen</strong> Größen einfach über den Faktor $r$ zusammen. So lassen sich die Translationsformeln auf die Rotation übertragen:</p>
+<div class="table-wrap"><table class="ft">
+<thead><tr><th>Rotation</th><th></th><th>Bahn (Translation)</th></tr></thead>
+<tbody>
+<tr><td>Winkel $\Theta$</td><td>$\times\,r$ →</td><td>Bogenlänge $s=r\,\Theta$</td></tr>
+<tr><td>Winkelgeschw. $\omega$</td><td>$\times\,r$ →</td><td>Bahngeschw. $v=r\,\omega$</td></tr>
+<tr><td>Winkelbeschl. $\alpha$</td><td>$\times\,r$ →</td><td>Tangentialbeschl. $a_t=r\,\alpha$</td></tr>
+</tbody>
+</table></div>
+<div class="warn">⚠️ Das gilt <strong>nur für die kinematischen</strong> Größen. Bei den dynamischen Analogien ist es <strong>kein</strong> einfaches ×$r$: Trägheitsmoment $I = m\,r^2$ (Faktor $r^2$), Drehmoment $\vec M = \vec r\times\vec F$ (Kreuzprodukt), Drehimpuls $L = I\,\omega$. Die kinetische Energie behält ihre Form ($\tfrac{1}{2}I\omega^2$ statt $\tfrac{1}{2}mv^2$).</div>
 
 <h4>Trägheitsmoment</h4>
 <p class="formula">$$I=\sum_i m_i r_i^2$$</p>
@@ -552,6 +567,24 @@ s\cdot\vec{a}=\begin{pmatrix}s\,a_x\\s\,a_y\\s\,a_z\end{pmatrix}$$</p>
 <tr><td>$s_x=\sqrt{\tfrac{\sum(x_i-\overline{x})^2}{n-1}}$</td><td>Standardabweichung</td></tr>
 <tr><td>$n=N_e\,e^{-E_g/(k_B T)}$</td><td>Boltzmann-Faktor (angeregte Elektronen über der Bandlücke)</td></tr>
 <tr><td>${}^{A}_{Z}\text{X}$</td><td>Kernschreibweise: $A$ = Nukleonenzahl, $Z$ = Ordnungszahl</td></tr>
+</tbody>
+</table></div>
+</section>
+
+<section class="card" id="translation-rotation">
+<h2>Vergleich Translation ↔ Rotation</h2>
+<p>Alle Größen der geradlinigen Bewegung haben ein direktes Gegenstück in der Drehbewegung. Die letzte Spalte zeigt die <strong>kinematische Kopplung</strong> über den Bahnradius $r$ – sie gilt nur für Ort, Geschwindigkeit und Beschleunigung (×$r$), <strong>nicht</strong> für die dynamischen Größen.</p>
+<div class="table-wrap"><table class="ft">
+<thead><tr><th>Größe</th><th>Translation</th><th>Rotation</th><th>Kopplung (Punkt bei Radius $r$)</th></tr></thead>
+<tbody>
+<tr><td>Ort / Winkel</td><td>$x$</td><td>$\Theta$</td><td>$s = r\,\Theta$</td></tr>
+<tr><td>Geschwindigkeit</td><td>$v=\dot x$</td><td>$\omega=\dot\Theta$</td><td>$v = r\,\omega$</td></tr>
+<tr><td>Beschleunigung</td><td>$a=\ddot x$</td><td>$\alpha=\dot\omega$</td><td>$a_t = r\,\alpha$</td></tr>
+<tr><td>Masse / Trägheit</td><td>$m$</td><td>$I=\sum_i m_i r_i^2$</td><td>— ($r^2$, kein einfaches ×$r$)</td></tr>
+<tr><td>Kraft / Drehmoment</td><td>$\vec F=m\,\vec a$</td><td>$M=I\,\alpha$</td><td>— (Kreuzprodukt $\vec M=\vec r\times\vec F$)</td></tr>
+<tr><td>Impuls / Drehimpuls</td><td>$\vec p=m\,\vec v$</td><td>$L=I\,\omega$</td><td>—</td></tr>
+<tr><td>Grundgleichung</td><td>$\vec F=\dot{\vec p}$</td><td>$M=\dot L$</td><td>—</td></tr>
+<tr><td>kinetische Energie</td><td>$\tfrac{1}{2}m v^2$</td><td>$\tfrac{1}{2}I\omega^2$</td><td>—</td></tr>
 </tbody>
 </table></div>
 </section>
