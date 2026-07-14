@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Formelsammlung – NWG1</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+:root {
+  --bg: #f4f6f9; --bg-grad-1: #eef2f8; --bg-grad-2: #e7ecf5;
+  --card: #ffffff; --border: #d8dee8; --text: #1c2128; --muted: #59636e;
+  --link: #0550ae; --link-hover: #0a3d7a;
+  --accent-1: #6366f1; --accent-2: #0ea5e9;
+  --shadow: 0 1px 2px rgba(20,30,50,.04), 0 8px 24px rgba(20,30,50,.05);
+  --hint-bg: #fff8c5; --hint-border: #9a6700; --hint-text: #7a5200;
+  --sol-bg: #ddf4ff; --sol-border: #0550ae; --sol-text: #063d82;
+  --pill-bg: #eef1ff; --pill-text: #4338ca;
+  --table-head: #59636e;
+}
+:root[data-theme="dark"] {
+  --bg: #0d1117; --bg-grad-1: #0d1117; --bg-grad-2: #131a24;
+  --card: #161b22; --border: #30363d; --text: #e6edf3; --muted: #9198a1;
+  --link: #6cb6ff; --link-hover: #a5d1ff;
+  --accent-1: #818cf8; --accent-2: #38bdf8;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+  --hint-bg: #2b2111; --hint-border: #d29922; --hint-text: #e3b341;
+  --sol-bg: #10243d; --sol-border: #388bfd; --sol-text: #8ec8ff;
+  --pill-bg: #1c2333; --pill-text: #b3c2ff;
+  --table-head: #9198a1;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1117; --bg-grad-1: #0d1117; --bg-grad-2: #131a24;
+    --card: #161b22; --border: #30363d; --text: #e6edf3; --muted: #9198a1;
+    --link: #6cb6ff; --link-hover: #a5d1ff;
+    --accent-1: #818cf8; --accent-2: #38bdf8;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+    --hint-bg: #2b2111; --hint-border: #d29922; --hint-text: #e3b341;
+    --sol-bg: #10243d; --sol-border: #388bfd; --sol-text: #8ec8ff;
+    --pill-bg: #1c2333; --pill-text: #b3c2ff;
+    --table-head: #9198a1;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(1000px 420px at 15% -10%, color-mix(in srgb, var(--accent-1) 9%, transparent), transparent),
+    radial-gradient(900px 420px at 100% 0%, color-mix(in srgb, var(--accent-2) 9%, transparent), transparent),
+    linear-gradient(180deg, var(--bg-grad-1), var(--bg-grad-2) 220px, var(--bg) 420px);
+  min-height: 100vh;
+}
+.wrap { max-width: 900px; margin: 0 auto; padding: 28px 20px 80px; }
+.back { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); text-decoration: none; font-size: 13.5px; margin-bottom: 16px; }
+.back:hover { color: var(--link); }
+.head {
+  background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+  padding: 22px 26px; box-shadow: var(--shadow); margin-bottom: 18px;
+}
+.eyebrow {
+  display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--pill-text); background: var(--pill-bg); padding: 3px 10px; border-radius: 999px; margin-bottom: 12px;
+}
+.head h1 { margin: 0 0 8px; font-size: 26px; font-weight: 800; letter-spacing: -0.01em; line-height: 1.25; }
+.head p.intro { margin: 0; color: var(--muted); font-size: 14.5px; line-height: 1.6; }
+.toc {
+  background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+  padding: 16px 20px; box-shadow: var(--shadow); margin-bottom: 18px;
+}
+.toc .label { font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.toc ul { list-style: none; margin: 0; padding: 0; columns: 2; column-gap: 24px; }
+.toc li { font-size: 14px; margin-bottom: 5px; break-inside: avoid; }
+.toc a { color: var(--link); text-decoration: none; }
+.toc a:hover { color: var(--link-hover); text-decoration: underline; }
+section.card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+  padding: 20px 24px 22px; box-shadow: var(--shadow); margin-bottom: 16px; scroll-margin-top: 16px;
+}
+section.card h2 { margin: 0 0 14px; font-size: 19px; font-weight: 800; letter-spacing: -0.01em; }
+section.card h4 { margin: 18px 0 8px; font-size: 14px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+section.card h4:first-of-type { margin-top: 4px; }
+section.card p { margin: 0 0 12px; font-size: 14.5px; line-height: 1.65; }
+section.card .formula { margin: 4px 0 16px; font-size: 15px; }
+.table-wrap { overflow-x: auto; margin: 4px 0 16px; }
+table.ft { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+table.ft th, table.ft td { padding: 6px 12px; text-align: left; border-bottom: 1px solid var(--border); white-space: nowrap; }
+table.ft thead th { font-weight: 700; color: var(--table-head); font-size: 11px; text-transform: uppercase; letter-spacing: .04em; border-bottom: 2px solid var(--border); }
+table.ft tr:last-child td { border-bottom: none; }
+.callout {
+  background: var(--sol-bg); border: 1px solid var(--sol-border); color: var(--sol-text);
+  border-radius: 10px; padding: 12px 16px; margin: 4px 0 16px; font-size: 14px; line-height: 1.6;
+}
+.callout strong { color: var(--text); }
+ul.merke { margin: 0 0 6px; padding-left: 20px; font-size: 14.5px; line-height: 1.7; }
+ul.merke li { margin-bottom: 2px; }
+hr.sep { border: none; border-top: 1px dashed var(--border); margin: 18px 0; }
+footer { text-align: center; color: var(--muted); font-size: 12.5px; margin-top: 28px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">← Zur Übersicht</a>
+
+<div class="head">
+<div class="eyebrow">Klausurvorbereitung</div>
+<h1>Formelsammlung – Naturwissenschaftliche Grundlagen 1 (NWG1)</h1>
+<p class="intro">Nach den Foliensätzen von Prof. Dr. Alexander Braun (HSD). Thematisch geordnet, mit den prüfungsrelevanten Formeln und Kernbegriffen zum Auswendiglernen.</p>
+</div>
+
+<div class="toc">
+<div class="label">Inhalt</div>
+<ul>
+<li><a href="#sec1">1. Einheiten &amp; Größen</a></li>
+<li><a href="#sec2">2. Diagramme, Graphen &amp; Fehler</a></li>
+<li><a href="#sec3">3. Bewegung in 1d und 3d</a></li>
+<li><a href="#sec4">4. Newtons Gesetze</a></li>
+<li><a href="#sec5">5. Energie</a></li>
+<li><a href="#sec6">6. Gravitation</a></li>
+<li><a href="#sec7">7. Rotation (Drehbewegung)</a></li>
+<li><a href="#sec8">8. Impuls</a></li>
+<li><a href="#sec9">9. Atommodelle &amp; Periodensystem (PSE)</a></li>
+<li><a href="#sec10">10. Vom Atom zum Molekül (I &amp; II)</a></li>
+<li><a href="#sec11">11. Festkörper</a></li>
+<li><a href="#konstanten">Nützliche Naturkonstanten</a></li>
+<li><a href="#uebersicht">Kompakte Formelübersicht</a></li>
+</ul>
+</div>
+
+<section class="card" id="sec1">
+<h2>1. Einheiten &amp; Größen</h2>
+<p><strong>Physikalische Größe</strong> = Maßzahl × Einheit, z. B. $h = 3\,\text{m}$</p>
+
+<h4>SI-Basisgrößen und -einheiten</h4>
+<div class="table-wrap"><table class="ft">
+<tbody>
+<tr><td>Länge</td><td>m</td><td></td><td>Temperatur</td><td>K</td></tr>
+<tr><td>Masse</td><td>kg</td><td></td><td>Stoffmenge</td><td>mol</td></tr>
+<tr><td>Zeit</td><td>s</td><td></td><td>Lichtstärke</td><td>cd</td></tr>
+<tr><td>Stromstärke</td><td>A</td><td></td><td></td><td></td></tr>
+</tbody>
+</table></div>
+
+<h4>Wichtige abgeleitete Einheiten</h4>
+<p class="formula">$$[F] = \text{N} = \frac{\text{kg}\cdot\text{m}}{\text{s}^2} \qquad [E] = \text{J} = \text{N}\cdot\text{m} = \text{W}\cdot\text{s} = \frac{\text{kg}\cdot\text{m}^2}{\text{s}^2} \qquad [P] = \text{W} = \frac{\text{J}}{\text{s}} = \frac{\text{kg}\cdot\text{m}^2}{\text{s}^3}$$</p>
+
+<h4>SI-Präfixe</h4>
+<div class="table-wrap"><table class="ft">
+<thead><tr><th>größer</th><th>k</th><th>M</th><th>G</th><th>T</th><th>P</th></tr></thead>
+<tbody>
+<tr><td></td><td>$10^{3}$</td><td>$10^{6}$</td><td>$10^{9}$</td><td>$10^{12}$</td><td>$10^{15}$</td></tr>
+<tr><td><strong>kleiner</strong></td><td><strong>m</strong></td><td><strong>µ</strong></td><td><strong>n</strong></td><td><strong>p</strong></td><td><strong>f</strong></td></tr>
+<tr><td></td><td>$10^{-3}$</td><td>$10^{-6}$</td><td>$10^{-9}$</td><td>$10^{-12}$</td><td>$10^{-15}$</td></tr>
+</tbody>
+</table></div>
+
+<h4>Rechenregeln für Einheiten</h4>
+<ul class="merke">
+<li>Addition/Subtraktion: nur zwischen Größen <strong>gleicher Dimension</strong></li>
+<li>Multiplikation/Division: immer erlaubt</li>
+<li>Transzendente Funktionen (sin, ln, e…): nur mit <strong>dimensionslosen</strong> Größen</li>
+<li>Differentiale: haben die Dimension der zugehörigen Größe</li>
+</ul>
+</section>
+
+<section class="card" id="sec2">
+<h2>2. Diagramme, Graphen &amp; Fehler</h2>
+
+<h4>Mittelwert</h4>
+<p class="formula">$$\overline{x} = \frac{1}{n}\sum_{i=1}^{n} x_i$$</p>
+
+<h4>Standardabweichung</h4>
+<p>(anschaulich, in Einheiten der Größe)</p>
+<p class="formula">$$s_x = \sqrt{\frac{\sum_{i=1}^{n}\left(x_i-\overline{x}\right)^2}{n-1}}$$</p>
+<p>Varianz $s_x^2$ – mathematisch korrekt (Fehler addieren sich quadratisch).</p>
+
+<h4>Gauß'sche Normalverteilung (Fehlerverteilung)</h4>
+<p class="formula">$$f(x) = \frac{1}{\sqrt{2\pi\sigma^2}}\cdot e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}$$</p>
+<p>$\mu$ = Erwartungswert, $\sigma$ = Standardabweichung; Bereich $\mu\pm\sigma \approx 68\%$.</p>
+
+<h4>RMSE (Root Mean Square Error)</h4>
+<p class="formula">$$\text{RMSE} = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(x_i-\overline{x})^2}$$</p>
+
+<h4>Merke</h4>
+<ul class="merke">
+<li>Systematischer Fehler (verschiebt den Wert) vs. zufälliger Fehler (streut den Wert).</li>
+<li>Ausgleichsgeraden dürfen <strong>nicht</strong> durch Anfangs- und Endpunkt gezwungen werden.</li>
+</ul>
+</section>
+
+<section class="card" id="sec3">
+<h2>3. Bewegung in 1d und 3d</h2>
+
+<h4>Kinematik (Grundgrößen)</h4>
+<p class="formula">$$v(t) = \frac{\Delta x}{\Delta t} = \dot{x}(t) \qquad a(t) = \frac{\Delta v}{\Delta t} = \dot{v}(t) = \ddot{x}(t)$$</p>
+
+<h4>Die zwei Spezialfälle</h4>
+<div class="table-wrap"><table class="ft">
+<thead><tr><th></th><th>Geschwindigkeit konstant</th><th>Beschleunigung konstant</th></tr></thead>
+<tbody>
+<tr><td>Strecke</td><td>$x(t) = v_0 t + x_0$</td><td>$x(t) = \tfrac{1}{2}a_0 t^2 + v_0 t + x_0$</td></tr>
+<tr><td>Geschwindigkeit</td><td>$v = \text{const.} = v_0$</td><td>$v(t) = a_0 t + v_0$</td></tr>
+<tr><td>Beschleunigung</td><td>$a = 0$</td><td>$a = \text{const.} = a_0$</td></tr>
+</tbody>
+</table></div>
+
+<div class="callout"><strong>Die eine Formel, die man können muss:</strong> $x(t) = \tfrac{1}{2}a_0 t^2 + v_0 t + x_0$ (durch zweimaliges Integrieren von $a=a_0$; Integrationskonstanten nicht vergessen!).</div>
+
+<h4>Vektoren – Betrag</h4>
+<p class="formula">$$\vec{a}=\begin{pmatrix}a_x\\a_y\\a_z\end{pmatrix}\qquad |\vec{a}| = \sqrt{a_x^2+a_y^2+a_z^2}\quad\text{(Pythagoras)}$$</p>
+
+<h4>Vektoren – Rechenregeln (komponentenweise)</h4>
+<p class="formula">$$\vec{a}+\vec{b}=\begin{pmatrix}a_x+b_x\\a_y+b_y\\a_z+b_z\end{pmatrix}\qquad
+\vec{a}-\vec{b}=\begin{pmatrix}a_x-b_x\\a_y-b_y\\a_z-b_z\end{pmatrix}\qquad
+s\cdot\vec{a}=\begin{pmatrix}s\,a_x\\s\,a_y\\s\,a_z\end{pmatrix}$$</p>
+<p>Einheitsvektoren und Linearkombination:</p>
+<p class="formula">$$\vec{e}_x=\begin{pmatrix}1\\0\\0\end{pmatrix},\;\;
+\vec{e}_y=\begin{pmatrix}0\\1\\0\end{pmatrix},\;\;
+\vec{e}_z=\begin{pmatrix}0\\0\\1\end{pmatrix}\qquad
+\vec{a}=a_x\vec{e}_x+a_y\vec{e}_y+a_z\vec{e}_z$$</p>
+
+<h4>Bewegung in 3d</h4>
+<p class="formula">$$\vec{x}(t)=\begin{pmatrix}x(t)\\y(t)\\z(t)\end{pmatrix}\qquad \vec{v}=\dot{\vec{x}}=\begin{pmatrix}\dot{x}\\\dot{y}\\\dot{z}\end{pmatrix}\qquad \vec{a}=\ddot{\vec{x}}=\begin{pmatrix}\ddot{x}\\\ddot{y}\\\ddot{z}\end{pmatrix}$$</p>
+<p>Die Komponenten sind <strong>unabhängig</strong> – je eine Bewegungsgleichung pro Richtung.</p>
+
+<h4>Schiefer Wurf / Turmwurf (3d, allgemeine Lösung)</h4>
+<p class="formula">$$\vec{x}(t)=\begin{pmatrix}\tfrac{1}{2}a_0^x t^2 + v_0^x t + x_0\\[4pt]\tfrac{1}{2}a_0^y t^2 + v_0^y t + y_0\\[4pt]\tfrac{1}{2}a_0^z t^2 + v_0^z t + z_0\end{pmatrix}$$</p>
+<p>Die Schwerkraft wirkt nur auf die vertikale Achse, z. B. $a_0^z = g = -9{,}81\,\tfrac{\text{m}}{\text{s}^2}$, die übrigen Beschleunigungen sind null.</p>
+
+<h4>Relativgeschwindigkeit</h4>
+<p class="formula">$$\vec{v}=\vec{v}_A+\vec{v}_B \qquad\text{(Addition der Geschwindigkeitsvektoren)}$$</p>
+</section>
+
+<section class="card" id="sec4">
+<h2>4. Newtons Gesetze</h2>
+
+<h4>1. Gesetz – Trägheit</h4>
+<p>Ein Körper behält Ruhe bzw. gleichförmige Bewegung bei, solange keine resultierende Kraft wirkt.</p>
+<p class="formula">$$\sum_i \vec{F}_i = 0 \;\Rightarrow\; \vec{v}=\text{const.}$$</p>
+
+<h4>2. Gesetz – Grundgleichung der Mechanik</h4>
+<p>$\vec{a}\propto\vec{F}$, die Masse ist die Proportionalitätskonstante:</p>
+<p class="formula">$$\boxed{\vec{F}=m\cdot\vec{a}} \qquad \vec{a}=\frac{\vec{F}}{m}\qquad \vec{F}=m\cdot\frac{\mathrm{d}^2\vec{x}}{\mathrm{d}t^2}$$</p>
+<p>Einheit: $[F]=[m\cdot a]=\text{kg}\cdot\text{m}/\text{s}^2=\text{N}$.</p>
+
+<h4>3. Gesetz – Actio = Reactio</h4>
+<p class="formula">$$\vec{F}_{\text{actio}}=-\vec{F}_{\text{reactio}}$$</p>
+<p>Daraus folgt für die beteiligten Massen:</p>
+<p class="formula">$$m_1\,\vec{a}_1=-\,m_2\,\vec{a}_2 \qquad\Rightarrow\qquad \frac{m_1}{m_2}=-\frac{|\vec{a}_2|}{|\vec{a}_1|}$$</p>
+
+<h4>Hooke'sches Gesetz (Federkraft)</h4>
+<p class="formula">$$F=-k\cdot x$$</p>
+<p>Die Kraft ist proportional zur Auslenkung $x$ und zeigt ihr <strong>entgegen</strong>; $k$ = Federkonstante. Einsetzen in das 2. Newton'sche Gesetz liefert die Gleichung des <strong>harmonischen Oszillators</strong>:</p>
+<p class="formula">$$m\cdot\ddot{x}+k\cdot x = 0$$</p>
+
+<h4>Gewichtskraft</h4>
+<p class="formula">$$F_G = m\cdot g$$</p>
+</section>
+
+<section class="card" id="sec5">
+<h2>5. Energie</h2>
+
+<h4>Skalarprodukt (Vektor · Vektor = Skalar)</h4>
+<p class="formula">$$\vec{a}\cdot\vec{b}=a_x b_x + a_y b_y + a_z b_z = |\vec{a}|\cdot|\vec{b}|\cdot\cos\alpha$$</p>
+<ul class="merke">
+<li>Betragsquadrat: $\vec{a}\cdot\vec{a}=|\vec{a}|^2$</li>
+<li>Orthogonal ($\alpha=90^\circ$): $\vec{a}\cdot\vec{b}=0$</li>
+<li>Projektion von $\vec{a}$ auf $\vec{b}$: $a_b=|\vec{a}|\cos\alpha=\vec{a}\cdot\vec{e}_b$</li>
+</ul>
+
+<h4>Arbeit</h4>
+<p class="formula">$$W = \vec{F}\cdot\vec{x} = |\vec{F}|\cdot|\vec{x}|\cdot\cos\alpha$$</p>
+<p>Es zählt nur der Anteil von $\vec F$ in Wegrichtung. Allgemein / bei variabler Kraft:</p>
+<p class="formula">$$W = \int \vec{F}\cdot\mathrm{d}\vec{x}$$</p>
+<p>Steht $\vec F\perp\vec x$ (z. B. Zentripetalkraft), ist $W=0$.</p>
+
+<h4>Die drei Energieformen</h4>
+<p class="formula">$$E_{\text{pot}}^{\text{(Gravitation)}} = m\cdot g\cdot h \qquad E_{\text{pot}}^{\text{(Feder)}} = \frac{1}{2}k\,x^2 \qquad E_{\text{kin}} = \frac{1}{2}m\,v^2$$</p>
+<p>Feder-Energie aus der Arbeit: $W=\int(k x)\,\mathrm{d}x = \tfrac{1}{2}k x^2 = E_{\text{pot}}$.</p>
+
+<h4>Energieerhaltung</h4>
+<p class="formula">$$m\,g\,h = \frac{1}{2}m\,v^2 \qquad\text{(pot.}\rightarrow\text{kin. Energie)}$$</p>
+<p>Energie kann umgewandelt, übertragen und gespeichert werden.</p>
+
+<h4>Kraft als Gradient des Potentials</h4>
+<p class="formula">$$\nabla = \left(\frac{\partial}{\partial x},\frac{\partial}{\partial y},\frac{\partial}{\partial z}\right) \qquad \vec{F} = -\nabla E_{\text{pot}}$$</p>
+<p>Die Kraft zeigt zum Potential-Minimum; die Ruhelage liegt im Minimum, wo der Gradient null ist.</p>
+</section>
+
+<section class="card" id="sec6">
+<h2>6. Gravitation</h2>
+
+<h4>Universelles Gravitationsgesetz</h4>
+<p class="formula">$$\boxed{F_G = G\,\frac{M_1 M_2}{r^2}} \qquad G = 6{,}67\cdot10^{-11}\,\frac{\text{m}^3}{\text{kg}\cdot\text{s}^2}$$</p>
+<p>Vektoriell (Anziehung entlang der Verbindungslinie):</p>
+<p class="formula">$$\vec{F}_G = G\,\frac{M_1 M_2}{|\vec{x}|^2}\cdot\frac{\vec{x}}{|\vec{x}|}\qquad \vec F_G\propto\frac{1}{r^2}$$</p>
+
+<h4>Erdbeschleunigung</h4>
+<p>Unabhängig von der Objektmasse (schwere = träge Masse):</p>
+<p class="formula">$$g = G\,\frac{M_{\text{Erde}}}{r^2}\approx 9{,}81\,\frac{\text{m}}{\text{s}^2}\qquad F_G = m\cdot g$$</p>
+
+<h4>3. Kepler'sches Gesetz</h4>
+<p class="formula">$$T^2 \propto a^3$$</p>
+<p>(1. Ellipsenbahnen, 2. gleiche Zeit – gleiche Fläche, 3. Umlaufzeit.)</p>
+
+<h4>Vergleich mit der Coulomb-Kraft</h4>
+<p class="formula">$$F_C=\frac{1}{4\pi\varepsilon_0}\frac{Q_1 Q_2}{r^2}$$</p>
+<p>Gleiche $1/r^2$-Form; die Gravitation ist um Faktor $\sim 10^{36}$ schwächer.</p>
+</section>
+
+<section class="card" id="sec7">
+<h2>7. Rotation (Drehbewegung)</h2>
+
+<h4>Analogie Bewegung ↔ Rotation (zentrale Tabelle!)</h4>
+<div class="table-wrap"><table class="ft">
+<thead><tr><th colspan="2">Bewegung</th><th colspan="2">Rotation</th></tr></thead>
+<tbody>
+<tr><td>Ort $x$</td><td></td><td>Winkel $\Theta$</td><td></td></tr>
+<tr><td>Geschwindigkeit</td><td>$v=\dot{x}$</td><td>Winkelgeschw.</td><td>$\omega=\dot{\Theta}$</td></tr>
+<tr><td>Beschleunigung</td><td>$a=\ddot{x}$</td><td>Winkelbeschl.</td><td>$\alpha=\dot{\omega}=\ddot{\Theta}$</td></tr>
+<tr><td>Kraft</td><td>$\vec F=m\vec a$</td><td>Drehmoment</td><td>$M=I\,\alpha$</td></tr>
+<tr><td>Masse</td><td>$m$</td><td>Trägheitsmoment</td><td>$I$</td></tr>
+<tr><td>Impuls</td><td>$\vec p=m\vec v$</td><td>Drehimpuls</td><td>$L=I\,\omega$</td></tr>
+<tr><td>Kraft</td><td>$\vec F=\dot{\vec p}$</td><td>Drehmoment</td><td>$M=\dot{L}$</td></tr>
+<tr><td>kin. Energie</td><td>$E_{\text{kin}}=\tfrac{1}{2}mv^2$</td><td>kin. Energie</td><td>$E_{\text{kin}}=\tfrac{1}{2}I\omega^2$</td></tr>
+</tbody>
+</table></div>
+
+<h4>Bahn ↔ Drehung</h4>
+<p class="formula">$$v = r\cdot\omega$$</p>
+
+<h4>Trägheitsmoment</h4>
+<p class="formula">$$I=\sum_i m_i r_i^2$$</p>
+
+<h4>Drehmoment (vektoriell, Kreuzprodukt)</h4>
+<p class="formula">$$\vec{M}=\vec{r}\times\vec{F}\qquad |\vec{M}|=|\vec{r}|\cdot|\vec{F}|\cdot\sin\Theta\qquad M_z = r_x F_y - r_y F_x$$</p>
+
+<h4>Zentripetalbeschleunigung / -kraft</h4>
+<p class="formula">$$a_z = \frac{v^2}{r} = r\,\omega^2 \qquad F_z = m\,\frac{v^2}{r} = m\,r\,\omega^2$$</p>
+<p>Steht senkrecht zu $\vec v$ → ändert nur die Richtung, nicht $E_{\text{kin}}$.</p>
+
+<h4>Arbeit bei Drehung</h4>
+<p class="formula">$$W=\int F\,\mathrm{d}x = M\cdot\Theta$$</p>
+
+<h4>Kreuzprodukt (Vektor × Vektor = Vektor)</h4>
+<p class="formula">$$\vec{c}=\vec{a}\times\vec{b}=\begin{pmatrix}a_y b_z - a_z b_y\\ a_z b_x - a_x b_z\\ a_x b_y - a_y b_x\end{pmatrix}$$</p>
+
+<h4>Schwerpunkt</h4>
+<p class="formula">$$\vec{S}=\frac{1}{M}\int_{\text{Körper}} \vec{x}\,\rho(\vec{x})\,\mathrm{d}V \;\overset{\rho=\text{const}}{=}\; \frac{1}{M\rho_0}\int \vec{x}\,\mathrm{d}V$$</p>
+<p>Bei homogenen Körpern = geometrischer Mittelpunkt.</p>
+</section>
+
+<section class="card" id="sec8">
+<h2>8. Impuls</h2>
+
+<h4>Impuls</h4>
+<p class="formula">$$\vec{p}=m\cdot\vec{v}$$</p>
+
+<h4>Kraft als Impulsänderung</h4>
+<p class="formula">$$\vec{F}=\frac{\mathrm{d}}{\mathrm{d}t}\vec{p}$$</p>
+
+<h4>Impulserhaltung</h4>
+<p>Im abgeschlossenen System (folgt aus Actio = Reactio):</p>
+<p class="formula">$$\sum_i \vec{p}_i = \text{const.}\qquad m_1\vec{v}_1 + m_2\vec{v}_2 + \dots = \text{const.}$$</p>
+<p>Nur <strong>äußere</strong> Kräfte ändern den Gesamtimpuls:</p>
+<p class="formula">$$\vec{F}_{\text{ext}}=\frac{\mathrm{d}}{\mathrm{d}t}\vec{P}=\frac{\mathrm{d}}{\mathrm{d}t}\sum_i \vec{p}_i$$</p>
+
+<h4>Drehimpulserhaltung (analog)</h4>
+<p class="formula">$$\sum_i L_i=\text{const.}\qquad M_{\text{ext}}=\frac{\mathrm{d}}{\mathrm{d}t}L_{\text{gesamt}}$$</p>
+
+<h4>Stöße</h4>
+<div class="table-wrap"><table class="ft">
+<thead><tr><th></th><th>Elastischer Stoß</th><th>Inelastischer Stoß</th></tr></thead>
+<tbody>
+<tr><td>Impuls</td><td>erhalten</td><td>erhalten</td></tr>
+<tr><td>kin. Energie</td><td>erhalten (wie in Feder gespeichert)</td><td>teilweise → Wärme/Verformung</td></tr>
+</tbody>
+</table></div>
+
+<p><strong>Raketenantrieb</strong> (Impulserhaltung): $\dfrac{\mathrm d}{\mathrm dt}\!\left(M\vec v + m\vec V\right)=0$ – leichtes Gas mit großer Geschwindigkeit beschleunigt die schwere Rakete.</p>
+</section>
+
+<section class="card" id="sec9">
+<h2>9. Atommodelle &amp; Periodensystem (PSE)</h2>
+<p><strong>Aufbau:</strong> Atomkern (Protonen + Neutronen = Nukleonen) + Elektronenhülle (Orbitale). Fast die gesamte Masse steckt im Kern.</p>
+<p><strong>Kernschreibweise:</strong> ${}^{A}_{Z}\text{X}$ — $Z$ = Ordnungszahl (Protonen), $A$ = Nukleonenzahl.</p>
+<p><strong>Masse:</strong> $1\,\text{u}$ = atomare Masseneinheit ≈ 1 Nukleon; Atomgewicht ≈ $A\cdot\text{u}$. Elektron ≈ 0,511 MeV, Proton ≈ 938 MeV, Neutron ≈ 939,57 MeV.</p>
+<p><strong>Isotope:</strong> gleiches Element ($Z$ gleich), aber unterschiedliche Neutronenzahl.</p>
+<p><strong>Coulombkraft:</strong> $F_C=\dfrac{1}{4\pi\varepsilon_0}\dfrac{Q_1 Q_2}{r^2}$</p>
+
+<h4>Schalen, Orbitale &amp; Quantenzahlen</h4>
+<ul class="merke">
+<li>Elektronen haben <strong>keine Bahnen</strong>. Orbitale beschreiben quantenmechanisch, wo sich Elektronen aufhalten können – ein Orbital ist wie ein „Behälter" für <strong>max. 2 Elektronen</strong> (mit entgegengesetztem Spin).</li>
+<li>Vier Quantenzahlen bestimmen jedes Elektron eindeutig:
+  <ul class="merke">
+    <li><strong>Hauptquantenzahl</strong> $n$ → Schale (Energieniveau)</li>
+    <li><strong>Nebenquantenzahl</strong> $l$ → Form des Orbitals: s, p, d, f</li>
+    <li><strong>Magnet-Quantenzahl</strong> → Ausrichtung des Orbitals im Raum</li>
+    <li><strong>Spin-Quantenzahl</strong> → Spin (rauf/runter)</li>
+  </ul>
+</li>
+<li><strong>Pauli-Prinzip:</strong> Kein Elektron eines Atoms hat dieselben vier Quantenzahlen wie ein anderes.</li>
+<li><strong>Aufbauprinzip:</strong> Orbitale werden nach steigender Energie aufgefüllt (niedrigste zuerst).</li>
+</ul>
+
+<h4>Radioaktive Zerfälle</h4>
+<p class="formula">$$\text{Alpha:}\qquad {}^{224}_{88}\text{Ra}\;\longrightarrow\;{}^{220}_{86}\text{Rn}+{}^{4}_{2}\text{He}\qquad(Z-2,\;A-4)$$</p>
+<p class="formula">$$\text{Beta}^{-}:\qquad {}^{214}_{82}\text{Pb}\;\longrightarrow\;{}^{214}_{83}\text{Bi}+{}^{0}_{-1}e+\overline{\nu}_e\qquad(Z+1,\;A=\text{const.})$$</p>
+<p class="formula">$$\text{Gamma:}\qquad {}^{137}_{56}\text{Ba}^{*}\;\longrightarrow\;{}^{137}_{56}\text{Ba}+\gamma\qquad(Z,\,A\ \text{unverändert})$$</p>
+</section>
+
+<section class="card" id="sec10">
+<h2>10. Vom Atom zum Molekül (I &amp; II)</h2>
+<p><strong>Warum Bindungen?</strong> Sie entstehen, wenn der gebundene Zustand energetisch günstiger ist. Nur die Elektronenhülle nimmt teil.</p>
+<p><strong>Oktett-Regel:</strong> Jedes Atom strebt die stabile Edelgaskonfiguration an.</p>
+<p><strong>Drei Bindungsarten:</strong> ionisch (Elektronenübergang → Ionen, z. B. NaCl), kovalent (gemeinsame Orbitale; polar zum elektronegativeren Atom), metallisch (Elektronengas im Gitter).</p>
+
+<h4>Bindigkeit (kovalent)</h4>
+<div class="table-wrap"><table class="ft">
+<thead><tr><th></th><th>C</th><th>N</th><th>O</th><th>Cl</th></tr></thead>
+<tbody>
+<tr><td>Bindigkeit</td><td>4</td><td>3</td><td>2</td><td>1</td></tr>
+<tr><td>freie Elektronenpaare</td><td>0</td><td>1</td><td>2</td><td>3</td></tr>
+</tbody>
+</table></div>
+
+<p><strong>Das Mol / Avogadro-Zahl:</strong> $N_A = 6\cdot10^{23}\ \tfrac{1}{\text{mol}}$</p>
+<p><strong>Gesetz der konstanten Proportionen:</strong> Reaktionen laufen im Verhältnis <strong>ganzer Zahlen</strong> ab → in Mol rechnen:</p>
+<p class="formula">$$\text{N}_2 + 3\,\text{H}_2 \longrightarrow 2\,\text{NH}_3$$</p>
+
+<h4>Reaktionsenthalpie $\Delta H$</h4>
+<p>Verbrennung von Kohlenstoff:</p>
+<p class="formula">$$\text{C}+\text{O}_2\longrightarrow\text{CO}_2\qquad \Delta H = -394\ \tfrac{\text{kJ}}{\text{mol}}$$</p>
+<p>Verbrennung von Methan:</p>
+<p class="formula">$$\text{CH}_4+2\,\text{O}_2\longrightarrow\text{CO}_2+2\,\text{H}_2\text{O}\qquad \Delta H=-891\ \tfrac{\text{kJ}}{\text{mol}}$$</p>
+</section>
+
+<section class="card" id="sec11">
+<h2>11. Festkörper</h2>
+<p><strong>Bändermodell:</strong> Aus überlappenden Coulomb-Potentialen vieler Atome entstehen Energiebänder (Valenzband, Leitungsband, dazwischen die Bandlücke). Widerstand = Kehrwert der Leitfähigkeit.</p>
+<p><strong>Fermi-Niveau</strong> $E_{\text{Fermi}}$: Energie des höchsten besetzten Zustands (von unten aufgefüllt).</p>
+
+<h4>Leitfähigkeit über die Bandlücke (spez. Widerstand $\varrho$)</h4>
+<div class="table-wrap"><table class="ft">
+<thead><tr><th>Typ</th><th>Bandlücke</th><th>$\varrho$</th></tr></thead>
+<tbody>
+<tr><td>Metall / Leiter</td><td>keine (Bänder überlappen)</td><td>$\varrho &lt; 10^{-5}\ \Omega\text{m}$</td></tr>
+<tr><td>Halbleiter</td><td>klein</td><td>$10^{-5}\ \Omega\text{m} &lt; \varrho &lt; 10^{7}\ \Omega\text{m}$</td></tr>
+<tr><td>Isolator</td><td>groß</td><td>$\varrho &gt; 10^{7}\ \Omega\text{m}$</td></tr>
+</tbody>
+</table></div>
+
+<h4>Boltzmann-Faktor</h4>
+<p>Anzahl thermisch angeregter Elektronen über der Bandlücke $E_g$:</p>
+<p class="formula">$$n = N_e\cdot e^{-E_g/(k_B T)}$$</p>
+<p><strong>Dotierung:</strong> p-Dotierung (positive Ladungsträger/Löcher), n-Dotierung (negative Ladungsträger); stellt die Leitfähigkeit von Halbleitern gezielt ein.</p>
+</section>
+
+<section class="card" id="konstanten">
+<h2>Nützliche Naturkonstanten (CODATA)</h2>
+<div class="table-wrap"><table class="ft">
+<thead><tr><th>Konstante</th><th>Symbol</th><th>Wert</th></tr></thead>
+<tbody>
+<tr><td>Gravitationskonstante</td><td>$G$</td><td>$6{,}674\cdot10^{-11}\ \text{m}^3\,\text{kg}^{-1}\text{s}^{-2}$</td></tr>
+<tr><td>Erdbeschleunigung</td><td>$g$</td><td>$9{,}81\ \text{m/s}^2$</td></tr>
+<tr><td>Elementarladung</td><td>$e$</td><td>$1{,}602\cdot10^{-19}\ \text{As}$</td></tr>
+<tr><td>Boltzmann-Konstante</td><td>$k_B$</td><td>$1{,}381\cdot10^{-23}\ \text{J/K}$</td></tr>
+<tr><td>Lichtgeschwindigkeit</td><td>$c$</td><td>$2{,}998\cdot10^{8}\ \text{m/s}$</td></tr>
+<tr><td>elektr. Feldkonstante</td><td>$\varepsilon_0$</td><td>$8{,}854\cdot10^{-12}\ \text{As/(Vm)}$</td></tr>
+<tr><td>atomare Masseneinheit</td><td>$u$</td><td>$1{,}661\cdot10^{-27}\ \text{kg}$</td></tr>
+</tbody>
+</table></div>
+</section>
+
+<section class="card" id="uebersicht">
+<h2>Kompakte Formelübersicht (must-know)</h2>
+
+<h4>Kinematik</h4>
+<div class="table-wrap"><table class="ft">
+<thead><tr><th>Formel</th><th>Bedeutung</th></tr></thead>
+<tbody>
+<tr><td>$v=\dot{x}$</td><td>Geschwindigkeit</td></tr>
+<tr><td>$a=\dot{v}=\ddot{x}$</td><td>Beschleunigung</td></tr>
+<tr><td>$x(t)=v_0 t + x_0$</td><td>Weg, $v$ konstant</td></tr>
+<tr><td>$x(t)=\tfrac{1}{2}a_0 t^2 + v_0 t + x_0$</td><td>Weg, $a$ konstant</td></tr>
+<tr><td>$v(t)=a_0 t + v_0$</td><td>Geschwindigkeit, $a$ konstant</td></tr>
+<tr><td>$\lvert\vec a\rvert=\sqrt{a_x^2+a_y^2+a_z^2}$</td><td>Betrag eines Vektors</td></tr>
+</tbody>
+</table></div>
+
+<h4>Kräfte (Newton, Gravitation, Feder)</h4>
+<div class="table-wrap"><table class="ft">
+<thead><tr><th>Formel</th><th>Bedeutung</th></tr></thead>
+<tbody>
+<tr><td>$\vec F=m\,\vec a$</td><td>2. Newton'sches Gesetz</td></tr>
+<tr><td>$\vec F_{\text{actio}}=-\vec F_{\text{reactio}}$</td><td>3. Newton'sches Gesetz</td></tr>
+<tr><td>$\sum \vec F_i=0$</td><td>Gleichgewicht (1. Gesetz)</td></tr>
+<tr><td>$F_G=m\,g$</td><td>Gewichtskraft</td></tr>
+<tr><td>$F_G=G\,\dfrac{M_1 M_2}{r^2}$</td><td>Gravitationsgesetz</td></tr>
+<tr><td>$g=G\,\dfrac{M_{\text{Erde}}}{r^2}\approx 9{,}81\,\tfrac{\text{m}}{\text{s}^2}$</td><td>Erdbeschleunigung</td></tr>
+<tr><td>$F=-k\,x$</td><td>Hooke / Federkraft</td></tr>
+<tr><td>$F_C=\dfrac{1}{4\pi\varepsilon_0}\dfrac{Q_1 Q_2}{r^2}$</td><td>Coulombkraft</td></tr>
+</tbody>
+</table></div>
+
+<h4>Energie &amp; Arbeit</h4>
+<div class="table-wrap"><table class="ft">
+<thead><tr><th>Formel</th><th>Bedeutung</th></tr></thead>
+<tbody>
+<tr><td>$\vec a\cdot\vec b=a_xb_x+a_yb_y+a_zb_z=\lvert\vec a\rvert\lvert\vec b\rvert\cos\alpha$</td><td>Skalarprodukt</td></tr>
+<tr><td>$W=\vec F\cdot\vec x=\int\vec F\cdot\mathrm d\vec x$</td><td>Arbeit</td></tr>
+<tr><td>$E_{\text{kin}}=\tfrac{1}{2}m v^2$</td><td>kinetische Energie</td></tr>
+<tr><td>$E_{\text{pot}}=m g h$</td><td>pot. Energie (Gravitation)</td></tr>
+<tr><td>$E_{\text{pot}}=\tfrac{1}{2}k x^2$</td><td>pot. Energie (Feder)</td></tr>
+<tr><td>$m g h=\tfrac{1}{2}m v^2$</td><td>Energieerhaltung</td></tr>
+<tr><td>$\vec F=-\nabla E_{\text{pot}}$</td><td>Kraft = neg. Gradient</td></tr>
+</tbody>
+</table></div>
+
+<h4>Rotation</h4>
+<div class="table-wrap"><table class="ft">
+<thead><tr><th>Formel</th><th>Bedeutung</th></tr></thead>
+<tbody>
+<tr><td>$\omega=\dot{\Theta}$, $\alpha=\dot{\omega}$</td><td>Winkelgeschw. / -beschl.</td></tr>
+<tr><td>$v=r\,\omega$</td><td>Bahn ↔ Drehung</td></tr>
+<tr><td>$M=I\,\alpha$</td><td>Drehmoment</td></tr>
+<tr><td>$\vec M=\vec r\times\vec F$, $\lvert\vec M\rvert=\lvert\vec r\rvert\lvert\vec F\rvert\sin\Theta$</td><td>Drehmoment (vektoriell)</td></tr>
+<tr><td>$I=\sum_i m_i r_i^2$</td><td>Trägheitsmoment</td></tr>
+<tr><td>$L=I\,\omega$, $M=\dot L$</td><td>Drehimpuls</td></tr>
+<tr><td>$E_{\text{kin}}=\tfrac{1}{2}I\omega^2$</td><td>Rotationsenergie</td></tr>
+<tr><td>$a_z=\dfrac{v^2}{r}=r\omega^2$, $F_z=m\dfrac{v^2}{r}$</td><td>Zentripetalbeschl./-kraft</td></tr>
+</tbody>
+</table></div>
+
+<h4>Impuls</h4>
+<div class="table-wrap"><table class="ft">
+<thead><tr><th>Formel</th><th>Bedeutung</th></tr></thead>
+<tbody>
+<tr><td>$\vec p=m\,\vec v$</td><td>Impuls</td></tr>
+<tr><td>$\vec F=\dot{\vec p}$</td><td>Kraft = Impulsänderung</td></tr>
+<tr><td>$\sum\vec p_i=\text{const.}$</td><td>Impulserhaltung</td></tr>
+<tr><td>$\sum L_i=\text{const.}$</td><td>Drehimpulserhaltung</td></tr>
+</tbody>
+</table></div>
+
+<h4>Statistik / Chemie / Festkörper</h4>
+<div class="table-wrap"><table class="ft">
+<thead><tr><th>Formel</th><th>Bedeutung</th></tr></thead>
+<tbody>
+<tr><td>$\overline{x}=\tfrac{1}{n}\sum x_i$</td><td>Mittelwert</td></tr>
+<tr><td>$s_x=\sqrt{\tfrac{\sum(x_i-\overline{x})^2}{n-1}}$</td><td>Standardabweichung</td></tr>
+<tr><td>$n=N_e\,e^{-E_g/(k_B T)}$</td><td>Boltzmann-Faktor (angeregte Elektronen über der Bandlücke)</td></tr>
+<tr><td>${}^{A}_{Z}\text{X}$</td><td>Kernschreibweise: $A$ = Nukleonenzahl, $Z$ = Ordnungszahl</td></tr>
+</tbody>
+</table></div>
+</section>
+
+<footer>Naturwissenschaftliche Grundlagen I · Formelsammlung</footer>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (window.renderMathInElement) {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "$", right: "$", display: false}
+      ]
+    });
+  }
+});
+</script>
+</body>
+</html>
