@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Elektron im Magnetfeld ***</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+:root {
+  --bg: #f4f6f9; --bg-grad-1: #eef2f8; --bg-grad-2: #e7ecf5;
+  --card: #ffffff; --border: #d8dee8; --text: #1c2128; --muted: #59636e;
+  --link: #0550ae; --link-hover: #0a3d7a;
+  --accent-1: #6366f1; --accent-2: #0ea5e9;
+  --shadow: 0 1px 2px rgba(20,30,50,.04), 0 8px 24px rgba(20,30,50,.05);
+  --hint-bg: #fff8c5; --hint-border: #9a6700; --hint-text: #7a5200;
+  --sol-bg: #ddf4ff; --sol-border: #0550ae; --sol-text: #063d82;
+  --pill-bg: #eef1ff; --pill-text: #4338ca;
+  --diff-1: #1a7f37; --diff-1-bg: #dafbe1;
+  --diff-2: #9a6700; --diff-2-bg: #fff8c5;
+  --diff-3: #cf222e; --diff-3-bg: #ffebe9;
+}
+:root[data-theme="dark"] {
+  --bg: #0d1117; --bg-grad-1: #0d1117; --bg-grad-2: #131a24;
+  --card: #161b22; --border: #30363d; --text: #e6edf3; --muted: #9198a1;
+  --link: #6cb6ff; --link-hover: #a5d1ff;
+  --accent-1: #818cf8; --accent-2: #38bdf8;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+  --hint-bg: #2b2111; --hint-border: #d29922; --hint-text: #e3b341;
+  --sol-bg: #10243d; --sol-border: #388bfd; --sol-text: #8ec8ff;
+  --pill-bg: #1c2333; --pill-text: #b3c2ff;
+  --diff-1: #3fb950; --diff-1-bg: #12261b;
+  --diff-2: #d29922; --diff-2-bg: #2b2111;
+  --diff-3: #f85149; --diff-3-bg: #2b1618;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1117; --bg-grad-1: #0d1117; --bg-grad-2: #131a24;
+    --card: #161b22; --border: #30363d; --text: #e6edf3; --muted: #9198a1;
+    --link: #6cb6ff; --link-hover: #a5d1ff;
+    --accent-1: #818cf8; --accent-2: #38bdf8;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+    --hint-bg: #2b2111; --hint-border: #d29922; --hint-text: #e3b341;
+    --sol-bg: #10243d; --sol-border: #388bfd; --sol-text: #8ec8ff;
+    --pill-bg: #1c2333; --pill-text: #b3c2ff;
+    --diff-1: #3fb950; --diff-1-bg: #12261b;
+    --diff-2: #d29922; --diff-2-bg: #2b2111;
+    --diff-3: #f85149; --diff-3-bg: #2b1618;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(1000px 420px at 15% -10%, color-mix(in srgb, var(--accent-1) 9%, transparent), transparent),
+    radial-gradient(900px 420px at 100% 0%, color-mix(in srgb, var(--accent-2) 9%, transparent), transparent),
+    linear-gradient(180deg, var(--bg-grad-1), var(--bg-grad-2) 220px, var(--bg) 420px);
+  min-height: 100vh;
+}
+.wrap { max-width: 760px; margin: 0 auto; padding: 28px 20px 70px; }
+.back { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); text-decoration: none; font-size: 13.5px; margin-bottom: 16px; }
+.back:hover { color: var(--link); }
+.head {
+  background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+  padding: 22px 26px; box-shadow: var(--shadow); margin-bottom: 18px;
+}
+.eyebrow {
+  display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--pill-text); background: var(--pill-bg); padding: 3px 10px; border-radius: 999px; margin-bottom: 12px;
+}
+.head h1 { margin: 0 0 8px; font-size: 24px; font-weight: 800; letter-spacing: -0.01em; line-height: 1.25; }
+.diffpill { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px; margin-left: 10px; vertical-align: middle; }
+.diffpill.diff-1 { color: var(--diff-1); background: var(--diff-1-bg); }
+.diffpill.diff-2 { color: var(--diff-2); background: var(--diff-2-bg); }
+.diffpill.diff-3 { color: var(--diff-3); background: var(--diff-3-bg); }
+.intro { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.55; }
+.given {
+  background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+  padding: 16px 20px; box-shadow: var(--shadow); margin-bottom: 18px;
+}
+.given .label { font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.given-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px 20px; }
+.given-row { display: flex; justify-content: space-between; gap: 12px; font-size: 14.5px; padding: 4px 0; border-bottom: 1px dashed var(--border); }
+.given-row:last-child { border-bottom: none; }
+.given-row .k { color: var(--muted); }
+.aufgabe {
+  background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+  padding: 18px 22px 20px; box-shadow: var(--shadow); margin-bottom: 14px;
+}
+.aufgabe-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.aufgabe-num {
+  flex: 0 0 auto; width: 26px; height: 26px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  color: white; font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center;
+}
+.aufgabe-head h2 { margin: 0; font-size: 15.5px; font-weight: 700; color: var(--muted); }
+.aufgabe p.q { margin: 0 0 14px; font-size: 15.5px; line-height: 1.6; }
+details { margin-bottom: 8px; }
+details:last-child { margin-bottom: 0; }
+summary {
+  cursor: pointer; font-size: 13px; font-weight: 700; list-style: none;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 12px; border-radius: 7px; border: 1px solid var(--border);
+  color: var(--muted); background: color-mix(in srgb, var(--border) 25%, transparent);
+  transition: background .12s ease;
+}
+summary::-webkit-details-marker { display: none; }
+summary:hover { background: color-mix(in srgb, var(--accent-1) 12%, transparent); }
+details[open] summary { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+.box {
+  margin-top: 0; padding: 12px 16px; border-radius: 0 8px 8px 8px;
+  font-size: 14.5px; line-height: 1.65; border: 1px solid; border-top: none;
+}
+.hint-box { background: var(--hint-bg); border-color: var(--hint-border); color: var(--hint-text); }
+.sol-box { background: var(--sol-bg); border-color: var(--sol-border); color: var(--sol-text); }
+.sol-box strong { color: var(--text); }
+footer { text-align: center; color: var(--muted); font-size: 12.5px; margin-top: 28px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../../index.html">← Zur Übersicht</a>
+<div class="head">
+<div class="eyebrow">Übungsaufgabe · Bewegung in 1d und 3d</div>
+<h1>Elektron im Magnetfeld<span class="diffpill diff-3">●●● schwer</span></h1>
+<p class="intro">In einem Massenspektrometer werden geladene Teilchen durch ein Magnetfeld abgelenkt. Die Ablenkkraft — die Lorentzkraft — ist ein Kreuzprodukt aus Geschwindigkeit und Magnetfeld.</p>
+</div>
+<div class="given">
+<div class="label">Gegeben</div>
+<div class="given-grid"><div class="given-row"><span class="k">Ladung Elektron</span><span class="v">$q = -1{,}602\times10^{-19}\,\text{C}$</span></div><div class="given-row"><span class="k">Masse Elektron</span><span class="v">$m_e = 9{,}109\times10^{-31}\,\text{kg}$</span></div><div class="given-row"><span class="k">Geschwindigkeit</span><span class="v">$\vec{v} = (2{,}0\times10^{6},\ 0,\ 0)\,\frac{\text{m}}{\text{s}}$</span></div><div class="given-row"><span class="k">Magnetfeld</span><span class="v">$\vec{B} = (0,\ 0,\ 0{,}50)\,\text{T}$</span></div></div>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-head"><div class="aufgabe-num">1</div><h2>Aufgabe 1</h2></div>
+<p class="q">Berechne den Kraftvektor $\vec{F} = q\,\vec{v}\times\vec{B}$.</p>
+<details><summary>💡 Hinweis</summary><div class="box hint-box">Berechne zuerst $\vec{v}\times\vec{B}$ komponentenweise, multipliziere das Ergebnis anschließend mit der (negativen!) Elementarladung $q$.</div></details>
+<details><summary>✅ Lösungsweg</summary><div class="box sol-box">$\vec{v}\times\vec{B} = (0\cdot0{,}5-0\cdot0,\ 0\cdot0-2{,}0\times10^{6}\cdot0{,}5,\ 0) = (0,\ -1{,}0\times10^{6},\ 0)$. Mit $q=-1{,}602\times10^{-19}\,\text{C}$: $\vec{F} = (0,\ 1{,}602\times10^{-13},\ 0)\,\text{N}$, also <strong>$|\vec{F}| \approx 1{,}60\times10^{-13}\,\text{N}$</strong> in $+y$-Richtung.</div></details>
+</div><div class="aufgabe">
+<div class="aufgabe-head"><div class="aufgabe-num">2</div><h2>Aufgabe 2</h2></div>
+<p class="q">Welche Bahnform ergibt sich für das Elektron, wenn $\vec{F}$ zu jedem Zeitpunkt senkrecht auf $\vec{v}$ steht?</p>
+<details><summary>💡 Hinweis</summary><div class="box hint-box">Eine Kraft, die immer senkrecht zur Geschwindigkeit steht, ändert nur die Richtung, nicht den Betrag von $\vec{v}$.</div></details>
+<details><summary>✅ Lösungsweg</summary><div class="box sol-box">Da $\vec{F} = q\,\vec{v}\times\vec{B}$ nach den Eigenschaften des Kreuzprodukts immer senkrecht auf $\vec{v}$ steht, wirkt sie wie eine Zentripetalkraft: Sie ändert laufend die Richtung, aber nie den Betrag der Geschwindigkeit. Das Elektron bewegt sich deshalb auf einer <strong>Kreisbahn</strong> senkrecht zu $\vec{B}$.</div></details>
+</div><div class="aufgabe">
+<div class="aufgabe-head"><div class="aufgabe-num">3</div><h2>Aufgabe 3</h2></div>
+<p class="q">Berechne den Radius dieser Kreisbahn.</p>
+<details><summary>💡 Hinweis</summary><div class="box hint-box">Zentripetalkraft = Lorentzkraft: $\frac{m_e v^2}{r} = |q|\,v\,B \Rightarrow r =\,\frac{m_e v}{|q|\,B}$</div></details>
+<details><summary>✅ Lösungsweg</summary><div class="box sol-box">$r =\,\frac{9{,}109\times10^{-31}\,\text{kg}\times2{,}0\times10^{6}\,\frac{\text{m}}{\text{s}}}{1{,}602\times10^{-19}\,\text{C}\times0{,}50\,\text{T}} \approx$ <strong>$2{,}27\times10^{-5}\,\text{m} = 22{,}7\,\mu\text{m}$</strong> — eine winzige Kreisbahn, typisch für das hohe Ladungs-zu-Masse-Verhältnis von Elektronen.</div></details>
+</div>
+<footer>Naturwissenschaftliche Grundlagen I · Übungsaufgaben</footer>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (window.renderMathInElement) {
+    renderMathInElement(document.body, {delimiters: [{left: "$", right: "$", display: false}]});
+  }
+});
+</script>
+</body>
+</html>
