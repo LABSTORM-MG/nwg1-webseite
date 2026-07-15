@@ -189,6 +189,17 @@ footer { text-align: center; color: var(--muted); font-size: 12.5px; margin-top:
 <p class="formula">$$\text{RMSE} = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(x_i-\overline{x})^2}$$</p>
 <div class="warn">🧠 <strong>Gedankenstütze (nicht exakt, nur Eselsbrücke!):</strong> RMSE sieht aus wie die Standardabweichung $s_x$, nur mit $n$ statt $n-1$ im Nenner. Streng genommen hinkt der Vergleich – RMSE misst per Definition Abweichungen vom Mittelwert (bzw. von einer Vorhersage) mit $n$, nicht mit $n-1$ –, aber zum Merken der beiden ähnlichen Formeln reicht dieser Trick meist aus.</div>
 
+<h4>Standardfehler des Mittelwerts (SEM)</h4>
+<p class="formula">$$SEM = \frac{\sigma}{\sqrt{n}}$$</p>
+<p>Streuung des <strong>Mittelwerts</strong> (nicht der Einzelmessung!) bei $n$ Messungen; nach $n$ auflösen: $n=\left(\dfrac{\sigma}{SEM}\right)^2$ — wie oft man messen muss, um eine bestimmte Genauigkeit zu erreichen.</p>
+
+<h4>Lineare Regression (Steigung der Ausgleichsgeraden)</h4>
+<p class="formula">$$k = \frac{n\cdot\Sigma xy - \Sigma x\cdot\Sigma y}{n\cdot\Sigma x^2 - (\Sigma x)^2}$$</p>
+
+<h4>Fehlerfortpflanzung</h4>
+<p>Bei Produkten/Potenzen addieren sich die <strong>relativen</strong> Fehler (mit Exponent gewichtet). Beispiel für $\rho = m/a^3$:</p>
+<p class="formula">$$\frac{\Delta\rho}{\rho} = \frac{\Delta m}{m} + 3\cdot\frac{\Delta a}{a}$$</p>
+
 <h4>Merke</h4>
 <ul class="merke">
 <li>Systematischer Fehler (verschiebt den Wert) vs. zufälliger Fehler (streut den Wert).</li>
@@ -237,6 +248,10 @@ s\cdot\vec{a}=\begin{pmatrix}s\,a_x\\s\,a_y\\s\,a_z\end{pmatrix}$$</p>
 
 <h4>Relativgeschwindigkeit</h4>
 <p class="formula">$$\vec{v}=\vec{v}_A+\vec{v}_B \qquad\text{(Addition der Geschwindigkeitsvektoren)}$$</p>
+
+<h4>Lorentzkraft (Kreuzprodukt-Anwendung)</h4>
+<p class="formula">$$\vec{F} = q\,\vec{v}\times\vec{B}$$</p>
+<p>Steht immer senkrecht auf $\vec v$ → wirkt wie eine Zentripetalkraft, das geladene Teilchen bewegt sich auf einer Kreisbahn mit Radius $r=\dfrac{mv}{|q|B}$.</p>
 </section>
 
 <section class="card" id="sec4">
@@ -263,6 +278,10 @@ s\cdot\vec{a}=\begin{pmatrix}s\,a_x\\s\,a_y\\s\,a_z\end{pmatrix}$$</p>
 
 <h4>Gewichtskraft</h4>
 <p class="formula">$$F_G = m\cdot g$$</p>
+
+<h4>Reibung</h4>
+<p class="formula">$$F_{H,\max} = \mu_s\cdot F_N \qquad F_{Gleit} = \mu_k\cdot F_N$$</p>
+<p>$\mu_s$ = Haftreibungskoeffizient, $\mu_k$ = Gleitreibungskoeffizient (immer $\mu_k<\mu_s$); Normalkraft $F_N=m\,g$ (eben) bzw. $F_N=m\,g\cos\theta$ (Schräge mit Neigungswinkel $\theta$). Hangabtriebskraft auf der schiefen Ebene: $F_{Hang}=m\,g\sin\theta$ — rutscht, wenn $F_{Hang}>F_{H,\max}$.</p>
 </section>
 
 <section class="card" id="sec5">
@@ -307,6 +326,12 @@ s\cdot\vec{a}=\begin{pmatrix}s\,a_x\\s\,a_y\\s\,a_z\end{pmatrix}$$</p>
 <p>Unabhängig von der Objektmasse (schwere = träge Masse):</p>
 <p class="formula">$$g = G\,\frac{M_{\text{Erde}}}{r^2}\approx 9{,}81\,\frac{\text{m}}{\text{s}^2}\qquad F_G = m\cdot g$$</p>
 
+<h4>Gravitative potentielle Energie (allgemein)</h4>
+<p>$E_{\text{pot}}=mgh$ gilt nur nahe der Oberfläche (konstantes $g$). Allgemein, über beliebige Distanzen $r$:</p>
+<p class="formula">$$E_{\text{pot}} = -\frac{G\,M\,m}{r}$$</p>
+<p>Damit z. B. die Fluchtgeschwindigkeit über Energieerhaltung ($E_{\text{kin}}+E_{\text{pot}}=0$):</p>
+<p class="formula">$$v_{\text{Flucht}} = \sqrt{\frac{2\,G\,M}{r}}$$</p>
+
 <h4>3. Kepler'sches Gesetz</h4>
 <p class="formula">$$T^2 \propto a^3$$</p>
 <p>(1. Ellipsenbahnen, 2. gleiche Zeit – gleiche Fläche, 3. Umlaufzeit.)</p>
@@ -334,6 +359,10 @@ s\cdot\vec{a}=\begin{pmatrix}s\,a_x\\s\,a_y\\s\,a_z\end{pmatrix}$$</p>
 </tbody>
 </table></div>
 
+<h4>Winkelgeschwindigkeit aus Frequenz/Periode</h4>
+<p class="formula">$$\omega = 2\pi f = \frac{2\pi}{T}$$</p>
+<p>$f$ = Frequenz (in Hz = Umdrehungen pro Sekunde), $T$ = Umlaufdauer/Periode.</p>
+
 <h4>Bahn ↔ Drehung (Umrechnung mit $r$)</h4>
 <p>Für einen Punkt im Abstand $r$ von der Drehachse hängen die <strong>kinematischen</strong> Größen einfach über den Faktor $r$ zusammen. So lassen sich die Translationsformeln auf die Rotation übertragen:</p>
 <div class="table-wrap"><table class="ft">
@@ -348,6 +377,15 @@ s\cdot\vec{a}=\begin{pmatrix}s\,a_x\\s\,a_y\\s\,a_z\end{pmatrix}$$</p>
 
 <h4>Trägheitsmoment</h4>
 <p class="formula">$$I=\sum_i m_i r_i^2$$</p>
+<p>Für gleichförmige Standardkörper (Rotation um die Symmetrieachse, Masse $m$, Radius $r$):</p>
+<div class="table-wrap"><table class="ft">
+<thead><tr><th>Körper</th><th>Trägheitsmoment</th></tr></thead>
+<tbody>
+<tr><td>Vollzylinder / Scheibe</td><td>$I=\tfrac{1}{2}mr^2$</td></tr>
+<tr><td>Hohlzylinder / Ring (dünnwandig)</td><td>$I=mr^2$</td></tr>
+<tr><td>Vollkugel</td><td>$I=\tfrac{2}{5}mr^2$</td></tr>
+</tbody>
+</table></div>
 
 <h4>Drehmoment (vektoriell, Kreuzprodukt)</h4>
 <p class="formula">$$\vec{M}=\vec{r}\times\vec{F}\qquad |\vec{M}|=|\vec{r}|\cdot|\vec{F}|\cdot\sin\Theta\qquad M_z = r_x F_y - r_y F_x$$</p>
@@ -406,6 +444,10 @@ s\cdot\vec{a}=\begin{pmatrix}s\,a_x\\s\,a_y\\s\,a_z\end{pmatrix}$$</p>
 </table></div>
 
 <p><strong>Raketenantrieb</strong> (Impulserhaltung): $\dfrac{\mathrm d}{\mathrm dt}\!\left(M\vec v + m\vec V\right)=0$ – leichtes Gas mit großer Geschwindigkeit beschleunigt die schwere Rakete.</p>
+
+<h4>Raketengleichung (Ziolkowski)</h4>
+<p class="formula">$$\Delta v = v_e\cdot\ln\!\left(\frac{m_0}{m_f}\right)$$</p>
+<p>$v_e$ = Ausströmgeschwindigkeit des Treibstoffs relativ zur Rakete, $m_0$ = Startmasse (voll betankt), $m_f$ = Endmasse (nach Ausbrennen).</p>
 </section>
 
 <section class="card" id="sec9">
@@ -415,6 +457,8 @@ s\cdot\vec{a}=\begin{pmatrix}s\,a_x\\s\,a_y\\s\,a_z\end{pmatrix}$$</p>
 <p><strong>Masse:</strong> $1\,\text{u}$ = atomare Masseneinheit ≈ 1 Nukleon; Atomgewicht ≈ $A\cdot\text{u}$. Elektron ≈ 0,511 MeV, Proton ≈ 938 MeV, Neutron ≈ 939,57 MeV.</p>
 <p><strong>Isotope:</strong> gleiches Element ($Z$ gleich), aber unterschiedliche Neutronenzahl.</p>
 <p><strong>Coulombkraft:</strong> $F_C=\dfrac{1}{4\pi\varepsilon_0}\dfrac{Q_1 Q_2}{r^2}$</p>
+<p><strong>Stoffmenge:</strong> $n=\dfrac{m}{M}$ ($m$ = Masse, $M$ = molare Masse); Teilchenzahl $N=n\cdot N_A$.</p>
+<p><strong>Massendefekt / Bindungsenergie:</strong> $E=\Delta m\cdot c^2$ (Differenz aus Summenmasse der Bausteine und tatsächlicher Kernmasse, in Energie umgerechnet).</p>
 
 <h4>Schalen, Orbitale &amp; Quantenzahlen</h4>
 <ul class="merke">
@@ -435,6 +479,10 @@ s\cdot\vec{a}=\begin{pmatrix}s\,a_x\\s\,a_y\\s\,a_z\end{pmatrix}$$</p>
 <p class="formula">$$\text{Alpha:}\qquad {}^{224}_{88}\text{Ra}\;\longrightarrow\;{}^{220}_{86}\text{Rn}+{}^{4}_{2}\text{He}\qquad(Z-2,\;A-4)$$</p>
 <p class="formula">$$\text{Beta}^{-}:\qquad {}^{214}_{82}\text{Pb}\;\longrightarrow\;{}^{214}_{83}\text{Bi}+{}^{0}_{-1}e+\overline{\nu}_e\qquad(Z+1,\;A=\text{const.})$$</p>
 <p class="formula">$$\text{Gamma:}\qquad {}^{137}_{56}\text{Ba}^{*}\;\longrightarrow\;{}^{137}_{56}\text{Ba}+\gamma\qquad(Z,\,A\ \text{unverändert})$$</p>
+
+<h4>Zerfallsgesetz</h4>
+<p class="formula">$$N(t) = N_0\cdot e^{-\lambda t} \qquad \lambda = \frac{\ln 2}{T_{1/2}} \qquad A = \lambda\cdot N$$</p>
+<p>$N_0$ = Anzahl Kerne zu Beginn, $\lambda$ = Zerfallskonstante, $T_{1/2}$ = Halbwertszeit, $A$ = Aktivität (Einheit Becquerel, $1\,\text{Bq}=1$ Zerfall/s).</p>
 </section>
 
 <section class="card" id="sec10">
@@ -544,6 +592,8 @@ s\cdot\vec{a}=\begin{pmatrix}s\,a_x\\s\,a_y\\s\,a_z\end{pmatrix}$$</p>
 <tr><td>$g=G\,\dfrac{M_{\text{Erde}}}{r^2}\approx 9{,}81\,\tfrac{\text{m}}{\text{s}^2}$</td><td>Erdbeschleunigung</td></tr>
 <tr><td>$F=-k\,x$</td><td>Hooke / Federkraft</td></tr>
 <tr><td>$F_C=\dfrac{1}{4\pi\varepsilon_0}\dfrac{Q_1 Q_2}{r^2}$</td><td>Coulombkraft</td></tr>
+<tr><td>$F_{H,\max}=\mu_s F_N$, $F_{Gleit}=\mu_k F_N$</td><td>Reibung</td></tr>
+<tr><td>$\vec F=q\,\vec v\times\vec B$</td><td>Lorentzkraft</td></tr>
 </tbody>
 </table></div>
 
@@ -554,7 +604,8 @@ s\cdot\vec{a}=\begin{pmatrix}s\,a_x\\s\,a_y\\s\,a_z\end{pmatrix}$$</p>
 <tr><td>$\vec a\cdot\vec b=a_xb_x+a_yb_y+a_zb_z=\lvert\vec a\rvert\lvert\vec b\rvert\cos\alpha$</td><td>Skalarprodukt</td></tr>
 <tr><td>$W=\vec F\cdot\vec x=\int\vec F\cdot\mathrm d\vec x$</td><td>Arbeit</td></tr>
 <tr><td>$E_{\text{kin}}=\tfrac{1}{2}m v^2$</td><td>kinetische Energie</td></tr>
-<tr><td>$E_{\text{pot}}=m g h$</td><td>pot. Energie (Gravitation)</td></tr>
+<tr><td>$E_{\text{pot}}=m g h$</td><td>pot. Energie (Gravitation, nahe Oberfläche)</td></tr>
+<tr><td>$E_{\text{pot}}=-\dfrac{GMm}{r}$</td><td>pot. Energie (Gravitation, allgemein)</td></tr>
 <tr><td>$E_{\text{pot}}=\tfrac{1}{2}k x^2$</td><td>pot. Energie (Feder)</td></tr>
 <tr><td>$m g h=\tfrac{1}{2}m v^2$</td><td>Energieerhaltung</td></tr>
 <tr><td>$\vec F=-\nabla E_{\text{pot}}$</td><td>Kraft = neg. Gradient</td></tr>
@@ -566,6 +617,7 @@ s\cdot\vec{a}=\begin{pmatrix}s\,a_x\\s\,a_y\\s\,a_z\end{pmatrix}$$</p>
 <thead><tr><th>Formel</th><th>Bedeutung</th></tr></thead>
 <tbody>
 <tr><td>$\omega=\dot{\Theta}$, $\alpha=\dot{\omega}$</td><td>Winkelgeschw. / -beschl.</td></tr>
+<tr><td>$\omega=2\pi f = \tfrac{2\pi}{T}$</td><td>Winkelgeschw. aus Frequenz/Periode</td></tr>
 <tr><td>$v=r\,\omega$</td><td>Bahn ↔ Drehung</td></tr>
 <tr><td>$M=I\,\alpha$</td><td>Drehmoment</td></tr>
 <tr><td>$\vec M=\vec r\times\vec F$, $\lvert\vec M\rvert=\lvert\vec r\rvert\lvert\vec F\rvert\sin\Theta$</td><td>Drehmoment (vektoriell)</td></tr>
@@ -584,6 +636,7 @@ s\cdot\vec{a}=\begin{pmatrix}s\,a_x\\s\,a_y\\s\,a_z\end{pmatrix}$$</p>
 <tr><td>$\vec F=\dot{\vec p}$</td><td>Kraft = Impulsänderung</td></tr>
 <tr><td>$\sum\vec p_i=\text{const.}$</td><td>Impulserhaltung</td></tr>
 <tr><td>$\sum L_i=\text{const.}$</td><td>Drehimpulserhaltung</td></tr>
+<tr><td>$\Delta v=v_e\,\ln(m_0/m_f)$</td><td>Raketengleichung</td></tr>
 </tbody>
 </table></div>
 
@@ -593,6 +646,10 @@ s\cdot\vec{a}=\begin{pmatrix}s\,a_x\\s\,a_y\\s\,a_z\end{pmatrix}$$</p>
 <tbody>
 <tr><td>$\overline{x}=\tfrac{1}{n}\sum x_i$</td><td>Mittelwert</td></tr>
 <tr><td>$s_x=\sqrt{\tfrac{\sum(x_i-\overline{x})^2}{n-1}}$</td><td>Standardabweichung</td></tr>
+<tr><td>$SEM=\sigma/\sqrt{n}$</td><td>Standardfehler des Mittelwerts</td></tr>
+<tr><td>$n=\dfrac{m}{M}$, $N=n\,N_A$</td><td>Stoffmenge / Teilchenzahl</td></tr>
+<tr><td>$N(t)=N_0e^{-\lambda t}$, $\lambda=\tfrac{\ln 2}{T_{1/2}}$</td><td>Zerfallsgesetz</td></tr>
+<tr><td>$E=\Delta m\,c^2$</td><td>Massendefekt / Bindungsenergie</td></tr>
 <tr><td>$\rho=\tfrac{m}{V}$</td><td>Dichte</td></tr>
 <tr><td>$Q=m\,c\,\Delta T$</td><td>Wärmemenge (Erwärmen/Abkühlen)</td></tr>
 <tr><td>$Q=m\,L$</td><td>Phasenübergangswärme (Schmelzen/Verdampfen)</td></tr>
