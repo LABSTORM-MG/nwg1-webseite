@@ -68,17 +68,29 @@ header.hero p.sub { margin: 0 0 20px; color: var(--muted); font-size: 15.5px; ma
   border-radius: 999px; padding: 6px 14px; font-size: 12.5px; font-weight: 600; cursor: pointer;
 }
 .formel-btn {
-  display: inline-flex; align-items: center; gap: 9px; margin-top: 16px;
+  position: relative; display: inline-flex; align-items: center; gap: 10px; margin-top: 18px;
   background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-  color: #fff; text-decoration: none; font-size: 14.5px; font-weight: 700;
-  padding: 11px 20px; border-radius: 12px;
-  box-shadow: 0 2px 6px color-mix(in srgb, var(--accent-1) 40%, transparent), 0 8px 20px color-mix(in srgb, var(--accent-2) 25%, transparent);
+  color: #fff; text-decoration: none; font-size: 16px; font-weight: 800;
+  padding: 14px 26px; border-radius: 14px;
+  box-shadow: 0 3px 8px color-mix(in srgb, var(--accent-1) 45%, transparent), 0 10px 26px color-mix(in srgb, var(--accent-2) 30%, transparent);
   transition: transform .12s ease, box-shadow .12s ease;
 }
-.formel-btn .ic { font-size: 17px; }
+.formel-btn .ic { font-size: 21px; }
 .formel-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 10px color-mix(in srgb, var(--accent-1) 45%, transparent), 0 12px 28px color-mix(in srgb, var(--accent-2) 30%, transparent);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 5px 12px color-mix(in srgb, var(--accent-1) 50%, transparent), 0 14px 32px color-mix(in srgb, var(--accent-2) 35%, transparent);
+}
+.formel-btn::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  animation: formel-ring 2.2s ease-out infinite;
+}
+@keyframes formel-ring {
+  0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent-2) 50%, transparent); opacity: 1; }
+  70%  { box-shadow: 0 0 0 14px color-mix(in srgb, var(--accent-2) 0%, transparent); opacity: 0; }
+  100% { box-shadow: 0 0 0 14px color-mix(in srgb, var(--accent-2) 0%, transparent); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .formel-btn::after { animation: none; }
 }
 .reset-btn:hover { color: var(--link); border-color: var(--link); }
 .row {
